@@ -80,18 +80,6 @@ def getKey():
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
     return key
 
-server_socket=BluetoothSocket(RFCOMM)
-server_socket.bind(("", PORT_ANY))
-server_socket.listen(1)
-port = server_socket.getsockname()[1]
-service_id = str(uuid.uuid4())
- 
-advertise_service(server_socket, "smartrobotServer",
-                  service_id = service_id,
-                  service_classes = [service_id, SERIAL_PORT_CLASS],
-                  profiles = [SERIAL_PORT_PROFILE])
-
-
 ## setup keyword
 move_speed = {
               'w':(0  ,0  ,0  ) ,       # forward
