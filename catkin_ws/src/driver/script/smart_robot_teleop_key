@@ -112,7 +112,7 @@ def constrain(input, low, high):
     return input
 
 def checkLinearLimitVelocity(vel):
-    vel = constrain(vel, -SMARTROBOT_MAX_LIN_VEL, SMART_MAX_LIN_VEL)
+    vel = constrain(vel, -SMARTROBOT_MAX_LIN_VEL, SMARTROBOT_MAX_LIN_VEL)
     return vel
 
 def checkAngularLimitVelocity(vel):
