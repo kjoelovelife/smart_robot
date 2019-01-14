@@ -108,6 +108,23 @@ class smart_robot():
                            'q':(0  ,  0,  w_speed       ) ,       # rotation_counterclockwise
                            'e':(0  ,  0, -1 * w_speed   ) ,       # rotation_clockwise 
                           }
+    
+    ## free action
+    def free_speed(self , vx_speed , vy_speed , w_speed):
+        self.vx = vx_speed + self.stop_speed
+        self.vy = vy_speed + self.stop_speed
+        self.w  = w_speed  + self.stop_speed
+        self.motor_speed = np.dot(self.speed_parameter ,self.linear_speed )
+        self.motor_A = int ( round(self.motor_speed[0] , 0 ) + self.stop_speed  )
+        self.motor_B = int ( round(self.motor_speed[1] , 0 ) + self.stop_speed  ) 
+        self.motor_C = int ( round(self.motor_speed[2] , 0 ) + self.stop_speed  )                   
+        self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!" 
+        print("  smart robot will free moving. \nsend: {} ".format(self.send_signal) )
+        if self.connected == True:
+            self.microcontroller.write( bytes( self.send_signal) )
+ 
+
+
 
     ## forward    
     def go(self): 
