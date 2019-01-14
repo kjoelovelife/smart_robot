@@ -100,6 +100,6 @@ if __name__ == '__main__':
             print''
             break
         else:
-            rospy.Subscriber('/control/cmd_vel', Twist, callback)
+            rospy.Subscriber('/cmd_vel', Twist, callback)
             rospy.spin()    
 
