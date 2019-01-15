@@ -32,11 +32,11 @@ import rospy
 from geometry_msgs.msg import Twist
 import sys, select, termios, tty
 
-SMARTROBOT_MAX_LIN_VEL = 0.22
-SMARTROBOT_MAX_ANG_VEL = 2.84
+SMARTROBOT_MAX_LIN_VEL = 126
+SMARTROBOT_MAX_ANG_VEL = 126
 
-LIN_VEL_STEP_SIZE = 0.01
-ANG_VEL_STEP_SIZE = 0.1
+LIN_VEL_STEP_SIZE = 1
+ANG_VEL_STEP_SIZE = 1
 
 msg = """
 Smart_robot setup !
