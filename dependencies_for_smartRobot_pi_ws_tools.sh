@@ -39,40 +39,40 @@ sudo apt-get install -y libopencv-dev
 sudo apt-get install libbullet-dev
 
 ## install path: ~/ros_catkin_ws/src
-cd ~/ros_catkin_ws
-rosinstall_generator joy \
-                     teleop_twist_joy \
-                     teleop_twist_keyboard \
-                     laser_proc rgbd_launch \
-                     depthimage_to_laserscan \
-                     rosserial_arduino \ 
-                     rosserial_python \
-                     rosserial_server \
-                     rosserial_client  \
-                     rosserial_masgs \
-                     amcl \
-                     map_server \
-                     move_base \
-                     urdf \
-                     xacro \
-                     compressed_image_transport \
-                     rqt_image_view \
-                     gmapping \
-                     navigation \
-                     interactive_markers \
-                     joystick_drivers \
-                     image_transport \
-                     cv_bridge \
-                     vision_opencv \
-                     opencv3 \
-                     image_proc \
-                     --rosdistro kinetic --deps --wet-only --tar > ros_kinetic_smartRobot.rosinstall
+#cd ~/ros_catkin_ws
+#rosinstall_generator joy \
+#                     teleop_twist_joy \
+#                     teleop_twist_keyboard \
+#                     laser_proc rgbd_launch \
+#                     depthimage_to_laserscan \
+#                     rosserial_arduino \ 
+#                     rosserial_python \
+#                     rosserial_server \
+#                     rosserial_client  \
+#                     rosserial_masgs \
+#                     amcl \
+#                     map_server \
+#                     move_base \
+#                     urdf \
+#                     xacro \
+#                     compressed_image_transport \
+#                     rqt_image_view \
+#                     gmapping \
+#                     navigation \
+#                     interactive_markers \
+#                     joystick_drivers \
+#                     image_transport \
+#                     cv_bridge \
+#                     vision_opencv \
+#                     opencv3 \
+#                     image_proc \
+#                     --rosdistro kinetic --deps --wet-only --tar > ros_kinetic_smartRobot.rosinstall
 
-wstool merge -t src ros_kinetic_smartRobot.rosinstall
-wstool update -t src
+#wstool merge -t src ros_kinetic_smartRobot.rosinstall
+#wstool update -t src
 
-rosdep install --from-paths src --ignore-src --rosdistro kinetic -y -r --os=debian:stretch
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILED_TYPE=Release --install-space /opt/ros/kinetic
+#rosdep install --from-paths src --ignore-src --rosdistro kinetic -y -r --os=debian:stretch
+#sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILED_TYPE=Release --install-space /opt/ros/kinetic
 
 # ROS Control App : https://play.google.com/store/apps/details?id=com.robotca.ControlApp
 
