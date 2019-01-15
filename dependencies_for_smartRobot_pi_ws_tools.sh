@@ -38,6 +38,10 @@ sudo apt-get install -y python-opencv
 sudo apt-get install -y libopencv-dev
 sudo apt-get install libbullet-dev
 
+## They don't have apt source
+cd ~/smart_robot/catkin_ws/src
+git clone https://github.com/ros/geometry2.git
+
 ## install path: ~/ros_catkin_ws/src
 #cd ~/ros_catkin_ws
 #rosinstall_generator joy \
