@@ -104,14 +104,14 @@ if __name__ == '__main__':
     robot.connect()       
     while(True):
         distance = robot.ultrasonic()
-        print(distance)
         ## enter the key word        
         key = getKey()
         ## judge what the word enter
         if key == '\x03' :
             robot.disconnect()
             break
-        elif key in move_speed.keys() :     
+        elif key in move_speed.keys() :  
+            print ("You enter [{}] ".format(key))   
             if key == 'w':
                 robot.go()    
             elif key == 'x':
@@ -126,4 +126,9 @@ if __name__ == '__main__':
                 robot.rotate_counterclockwise()
             elif key == 'e':
                 robot.rotate_clockwise()
+        elif key == 'u': 
+            print ("You enter [{}] ".format(key))   
+            print(distance)
+              
+
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings) 
