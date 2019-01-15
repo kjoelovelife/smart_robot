@@ -48,7 +48,7 @@ class smart_robot():
         ## ( vx , vy , w ) , and speed range is 0-255 , if value=127 is stop. 
         self.stop_speed = 127
         self.vx = self.stop_speed  
-        self.vy = self.stop_speed 
+        self.vy = self.stop_speed
         self.w  = self.stop_speed 
         self.angle = 360 ## angle of ominibot 
         self.length = 12 ## distance between center of ominibot and center of wheels 
@@ -83,6 +83,9 @@ class smart_robot():
                        'e':(0  ,  0, -50 ) ,       # rotation_clockwise 
                       }
 
+        ## setup judge_sendSignal
+        self.judge_sendSignal = self.send_signal
+
     ## connect port
     def connect(self):
         try:
@@ -113,44 +116,40 @@ class smart_robot():
     def free_speed(self , vx_speed , vy_speed , w_speed):
         self.vx = vx_speed + self.stop_speed
         self.vy = vy_speed + self.stop_speed
-        self.w  = w_speed  + self.stop_speed
-        self.motor_speed = np.dot(self.speed_parameter ,self.linear_speed )
-        self.motor_A = int ( round(self.motor_speed[0] , 0 ) + self.stop_speed  )
-        self.motor_B = int ( round(self.motor_speed[1] , 0 ) + self.stop_speed  ) 
-        self.motor_C = int ( round(self.motor_speed[2] , 0 ) + self.stop_speed  )                   
+        self.w  = w_speed  + self.stop_speed               
         self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!" 
-        print("  smart robot will free moving. \nsend: {} ".format(self.send_signal) )
+
+        if self.judge_sendSignal != self.send_signal:       
+            print("  smart robot will free moving. \nsend: {} ".format(self.send_signal) )
+            self.judge_sendSignal = self.send_signal
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
- 
+            self.vx = 0
+            self.vy = 0
+            self.w  = 0
 
 
-
-    ## forward    
+    ## forward  [speed]Y => speed > 127  
     def go(self): 
         self.vx = self.move_speed['w'][0] + self.stop_speed
         self.vy = self.move_speed['w'][1] + self.stop_speed   
-        self.w  = self.move_speed['w'][2] + self.stop_speed
-        self.motor_speed = np.dot(self.speed_parameter ,self.linear_speed )
-        self.motor_A = int ( round(self.motor_speed[0] , 0 ) + self.stop_speed  )
-        self.motor_B = int ( round(self.motor_speed[1] , 0 ) + self.stop_speed  ) 
-        self.motor_C = int ( round(self.motor_speed[2] , 0 ) + self.stop_speed  )                   
+        self.w  = self.move_speed['w'][2] + self.stop_speed                
         self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!"  
-        print("  smart robot will go forward. \nsend: {} ".format(self.send_signal) )
+        if self.judge_sendSignal != self.send_signal:       
+            print("  smart robot will go foward. \nsend: {} ".format(self.send_signal) )
+            self.judge_sendSignal = self.send_signal
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
 
-    ## back    
+    ## back     [speed]Y => speed < 127
     def back(self): 
         self.vx = self.move_speed['x'][0] + self.stop_speed
         self.vy = self.move_speed['x'][1] + self.stop_speed   
-        self.w  = self.move_speed['x'][2] + self.stop_speed
-        self.motor_speed = np.dot(self.speed_parameter ,self.linear_speed )
-        self.motor_A = int ( round(self.motor_speed[0] , 0 ) + self.stop_speed  )
-        self.motor_B = int ( round(self.motor_speed[1] , 0 ) + self.stop_speed  ) 
-        self.motor_C = int ( round(self.motor_speed[2] , 0 ) + self.stop_speed  )                   
+        self.w  = self.move_speed['x'][2] + self.stop_speed                
         self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!"  
-        print("  smart robot will go back. \nsend: {} ".format(self.send_signal) )
+        if self.judge_sendSignal != self.send_signal:       
+            print("  smart robot will back. \nsend: {} ".format(self.send_signal) )
+            self.judge_sendSignal = self.send_signal
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
 
@@ -158,72 +157,61 @@ class smart_robot():
     def stop(self): 
         self.vx = self.move_speed['s'][0] + self.stop_speed
         self.vy = self.move_speed['s'][1] + self.stop_speed   
-        self.w  = self.move_speed['s'][2] + self.stop_speed
-        self.motor_speed = np.dot(self.speed_parameter ,self.linear_speed )
-        self.motor_A = int ( round(self.motor_speed[0] , 0 ) + self.stop_speed  )
-        self.motor_B = int ( round(self.motor_speed[1] , 0 ) + self.stop_speed  ) 
-        self.motor_C = int ( round(self.motor_speed[2] , 0 ) + self.stop_speed  )                   
+        self.w  = self.move_speed['s'][2] + self.stop_speed                 
         self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!"  
-        print("  smart robot will stop. \nsend: {} ".format(self.send_signal) )
+        if self.judge_sendSignal != self.send_signal:       
+            print("  smart robot will stop. \nsend: {} ".format(self.send_signal) )
+            self.judge_sendSignal = self.send_signal
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
 
-    ## left    
+    ## left    [speed]X => speed < 127   
     def left(self): 
         self.vx = self.move_speed['a'][0] + self.stop_speed
         self.vy = self.move_speed['a'][1] + self.stop_speed   
-        self.w  = self.move_speed['a'][2] + self.stop_speed
-        self.motor_speed = np.dot(self.speed_parameter ,self.linear_speed )
-        self.motor_A = int ( round(self.motor_speed[0] , 0 ) + self.stop_speed  )
-        self.motor_B = int ( round(self.motor_speed[1] , 0 ) + self.stop_speed  ) 
-        self.motor_C = int ( round(self.motor_speed[2] , 0 ) + self.stop_speed  )                   
+        self.w  = self.move_speed['a'][2] + self.stop_speed                
         self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!"  
-        print("  smart robot will turn left. \nsend: {} ".format(self.send_signal) )
+        if self.judge_sendSignal != self.send_signal:       
+            print("  smart robot will turn left. \nsend: {} ".format(self.send_signal) )
+            self.judge_sendSignal = self.send_signal
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
 
-    ## right    
+    ## right   [speed]X => speed > 127 
     def right(self): 
         self.vx = self.move_speed['d'][0] + self.stop_speed
         self.vy = self.move_speed['d'][1] + self.stop_speed   
-        self.w  = self.move_speed['d'][2] + self.stop_speed
-        self.motor_speed = np.dot(self.speed_parameter ,self.linear_speed )
-        self.motor_A = int ( round(self.motor_speed[0] , 0 ) + self.stop_speed  )
-        self.motor_B = int ( round(self.motor_speed[1] , 0 ) + self.stop_speed  ) 
-        self.motor_C = int ( round(self.motor_speed[2] , 0 ) + self.stop_speed  )                   
+        self.w  = self.move_speed['d'][2] + self.stop_speed             
         self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!"  
-        print("  smart robot will turn right. \nsend: {} ".format(self.send_signal) )
+        if self.judge_sendSignal != self.send_signal:       
+            print("  smart robot will turn right. \nsend: {} ".format(self.send_signal) )
+            self.judge_sendSignal = self.send_signal
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
 
-    ## rotate counterclockwise    
+    ## rotate counterclockwise [speed]A => speed > 127    
     def rotate_counterclockwise(self): 
         self.vx = self.move_speed['q'][0] + self.stop_speed
         self.vy = self.move_speed['q'][1] + self.stop_speed   
-        self.w  = self.move_speed['q'][2] + self.stop_speed
-        self.motor_speed = np.dot(self.speed_parameter ,self.linear_speed )
-        self.motor_A = int ( round(self.motor_speed[0] , 0 ) + self.stop_speed  )
-        self.motor_B = int ( round(self.motor_speed[1] , 0 ) + self.stop_speed  ) 
-        self.motor_C = int ( round(self.motor_speed[2] , 0 ) + self.stop_speed  )                   
+        self.w  = self.move_speed['q'][2] + self.stop_speed                
         self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!"  
-        print("  smart robot will rotate in the counterclockwise. \nsend: {} ".format(self.send_signal) )
+        if self.judge_sendSignal != self.send_signal:       
+            print("  smart robot will rotate in the counterclockwise. \nsend: {} ".format(self.send_signal) )
+            self.judge_sendSignal = self.send_signal
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
 
-    ## rotate clockwise    
+    ## rotate clockwise  [speed]A => speed < 127    
     def rotate_clockwise(self): 
         self.vx = self.move_speed['e'][0] + self.stop_speed
         self.vy = self.move_speed['e'][1] + self.stop_speed   
-        self.w  = self.move_speed['e'][2] + self.stop_speed
-        self.motor_speed = np.dot(self.speed_parameter ,self.linear_speed )
-        self.motor_A = int ( round(self.motor_speed[0] , 0 ) + self.stop_speed  )
-        self.motor_B = int ( round(self.motor_speed[1] , 0 ) + self.stop_speed  ) 
-        self.motor_C = int ( round(self.motor_speed[2] , 0 ) + self.stop_speed  )                   
+        self.w  = self.move_speed['e'][2] + self.stop_speed                
         self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!"  
-        print("  smart robot will rotate in the clockwise. \nsend: {} ".format(self.send_signal) )
+        if self.judge_sendSignal != self.send_signal:       
+            print("  smart robot will rotate in the clockwise. \nsend: {} ".format(self.send_signal) )
+            self.judge_sendSignal = self.send_signal
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
-
     ## close port
     def disconnect(self):
         if self.connected == True:
