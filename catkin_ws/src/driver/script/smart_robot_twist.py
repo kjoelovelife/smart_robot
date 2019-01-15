@@ -75,12 +75,12 @@ CTRL-C to quit
 
 print(msg)
                     
-def callback(self , data):
+def callback(data):
     
-    twist = data.data
-    self.vy = twist.linear.x
-    self.Vw = twist.angular.z
-    smart_robot.free_speed( self.Vy, 0, self.Vw)
+    twist = data      
+    Vy = int(twist.linear.x)
+    Vw = int(twist.angular.z)   
+    robot.free_speed( 0, Vy, Vw)
 
 ##  start the process  ##
 if __name__ == '__main__':
@@ -101,5 +101,4 @@ if __name__ == '__main__':
             break
         else:
             rospy.Subscriber('/cmd_vel', Twist, callback)
-            rospy.spin()    
-
+            rospy.spin()
