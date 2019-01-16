@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -36,25 +37,33 @@ class ControlLane():
         rospy.on_shutdown(self.fnShutDown)
 
     def cbGetMaxVel(self, max_vel_msg):
-        self.MAX_VEL = max_vel_msg.data
+        #self.MAX_VEL = max_vel_msg.data
+        self.MAX_VEL = 127
 
     def cbFollowLane(self, desired_center):
         center = desired_center.data
 
         error = center - 500
 
-        Kp = 0.0025
-        Kd = 0.007
+        Kp = 0.00025  ## default = 0.0025
+        Kd = 0.0001   ## default = 0.007
+
+        x_max_speed = 20
+        z_max_speed = 20
 
         angular_z = Kp * error + Kd * (error - self.lastError)
         self.lastError = error
         twist = Twist()
-        twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.2)
+        #twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.2) # default
         twist.linear.y = 0
         twist.linear.z = 0
         twist.angular.x = 0
         twist.angular.y = 0
-        twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0)
+        #twist.angular.z = -max(angular_z, -2.0) if angular_z < 0 else -min(angular_z, 2.0) # default
+        twist.angular.z = -max(int (round(angular_z * 10000 ) ) , -1 * z_max_speed ) if angular_z < 0 else -min(int (round(angular_z * 1000) ), z_max_speed)
+        twist.angular.z = twist.angular.z * -1
+
+        
         self.pub_cmd_vel.publish(twist)
 
     def fnShutDown(self):
