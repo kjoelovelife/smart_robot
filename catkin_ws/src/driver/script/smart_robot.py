@@ -189,11 +189,11 @@ class smart_robot():
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
 
-    ## rotate counterclockwise [speed]A => speed > 127    
+    ## rotate counterclockwise [speed]A => speed < 127    
     def rotate_counterclockwise(self): 
-        self.vx = self.move_speed['q'][0] + self.stop_speed
-        self.vy = self.move_speed['q'][1] + self.stop_speed   
-        self.w  = self.move_speed['q'][2] + self.stop_speed                
+        self.vx = self.move_speed['e'][0] + self.stop_speed
+        self.vy = self.move_speed['e'][1] + self.stop_speed   
+        self.w  = self.move_speed['e'][2] + self.stop_speed                
         self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!"  
         if self.judge_sendSignal != self.send_signal:       
             print("  smart robot will rotate in the counterclockwise. \nsend: {} ".format(self.send_signal) )
@@ -201,11 +201,11 @@ class smart_robot():
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
 
-    ## rotate clockwise  [speed]A => speed < 127    
+    ## rotate clockwise  [speed]A => speed > 127    
     def rotate_clockwise(self): 
-        self.vx = self.move_speed['e'][0] + self.stop_speed
-        self.vy = self.move_speed['e'][1] + self.stop_speed   
-        self.w  = self.move_speed['e'][2] + self.stop_speed                
+        self.vx = self.move_speed['q'][0] + self.stop_speed
+        self.vy = self.move_speed['q'][1] + self.stop_speed   
+        self.w  = self.move_speed['q'][2] + self.stop_speed                
         self.send_signal = "$AP0:" + str(self.vx) + "X" + str(self.vy) + "Y" + str(self.w) + "A" + "360B!"  
         if self.judge_sendSignal != self.send_signal:       
             print("  smart robot will rotate in the clockwise. \nsend: {} ".format(self.send_signal) )
