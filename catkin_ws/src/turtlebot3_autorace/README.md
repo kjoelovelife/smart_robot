@@ -46,8 +46,8 @@
 - [e-Book for TurtleBot3](https://community.robotsource.org/t/download-the-ros-robot-programming-book-for-free/51/)
 - [Videos for TurtleBot3](https://www.youtube.com/playlist?list=PLRG6WP3c31_XI3wlvHlx2Mp8BYqgqDURU)
 
-## modified node
+## modified launch
 
-- turtlebot3_autorace_detect/nodes/detect_lane --> modified "self.desired_center"
+- turtlebot3_autorace_detect/launch/turtlebot3_autorace_detect_lane.launch 
 
-- turtlebot3_autorace_control/nodes/contorl_lane --> modified "x_max_speed , z_max_speed , twist.linear.x , twist.angular.z"
+- turtlebot3_autorace_control/launch/turtlebot3_autorace_control_lane.launch
