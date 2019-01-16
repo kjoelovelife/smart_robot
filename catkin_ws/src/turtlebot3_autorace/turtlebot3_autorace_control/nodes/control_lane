@@ -44,11 +44,11 @@ class ControlLane():
 
         error = center - 500
 
-        Kp = 0.00025  ## default = 0.0025
-        Kd = 0.0001   ## default = 0.007
+        Kp = rospy.get_param("~/kp", 0.00001)  ## default = 0.0025
+        Kd = rospy.get_param("~/kd", 0.007)   ## default = 0.007
 
-        x_max_speed = 20
-        z_max_speed = 20
+        x_max_speed = rospy.get_param("~/x_max_speed", 20) ## add
+        z_max_speed = rospy.get_param("~/z_max_speed", 40) ## add
 
         angular_z = Kp * error + Kd * (error - self.lastError)
         self.lastError = error
