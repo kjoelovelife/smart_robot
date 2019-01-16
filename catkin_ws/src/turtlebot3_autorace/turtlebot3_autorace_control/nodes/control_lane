@@ -55,6 +55,7 @@ class ControlLane():
         self.lastError = error
         twist = Twist()
         #twist.linear.x = min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2), 0.2) # default
+        twist.linear.x = int(round( min(self.MAX_VEL * ((1 - abs(error) / 500) ** 2.2) *1000 , x_max_speed ) ) ) 
         twist.linear.y = 0
         twist.linear.z = 0
         twist.angular.x = 0
