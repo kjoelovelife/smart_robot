@@ -43,6 +43,7 @@ class DetectLane():
         self.saturation_yellow_h = rospy.get_param("~detect/lane/yellow/saturation_h", 255)
         self.lightness_yellow_l = rospy.get_param("~detect/lane/yellow/lightness_l", 160)
         self.lightness_yellow_h = rospy.get_param("~detect/lane/yellow/lightness_h", 255)
+        self.desired_center = 100 # add it : setup the center
 
         self.is_calibration_mode = rospy.get_param("~is_detection_calibration_mode", False)
         if self.is_calibration_mode == True:
@@ -463,6 +464,7 @@ class DetectLane():
             # TODO: stop
             pass
 
+
         # Combine the result with the original image
         final = cv2.addWeighted(cv_image, 1, color_warp, 0.2, 0)
         final = cv2.addWeighted(final, 1, color_warp_lines, 1, 0)
@@ -471,7 +473,7 @@ class DetectLane():
             if self.is_center_x_exist == True:
                 # publishes lane center
                 msg_desired_center = Float64()
-                msg_desired_center.data = centerx.item(350)
+                msg_desired_center.data = centerx.item(self.desired_center) ## modified self.desired_center
                 self.pub_lane.publish(msg_desired_center)
 
             self.pub_image_lane.publish(self.cvBridge.cv2_to_compressed_imgmsg(final, "jpg"))
@@ -480,7 +482,7 @@ class DetectLane():
             if self.is_center_x_exist == True:
                 # publishes lane center
                 msg_desired_center = Float64()
-                msg_desired_center.data = centerx.item(350)
+                msg_desired_center.data = centerx.item(self.desired_center) ## modified self.desired_center
                 self.pub_lane.publish(msg_desired_center)
 
             self.pub_image_lane.publish(self.cvBridge.cv2_to_imgmsg(final, "bgr8"))
