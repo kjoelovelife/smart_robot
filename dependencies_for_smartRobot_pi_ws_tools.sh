@@ -55,7 +55,7 @@ git clone https://github.com/ros/geometry2.git
 # about voice recognition
 git clone https://github.com/UTNuclearRoboticsPublic/pocketsphinx.git
 git clone https://github.com/ros-drivers/audio_common.git
-# Download and copy the hub4wsj_sc_8k language model to /usr/share/pocketsphinx/model/hmm/en_US/. It can be found here
+# Download and copy the hub4wsj_sc_8k language model to /usr/share/pocketsphinx/model/hmm/en_US/. It can be found here : https://sourceforge.net/projects/cmusphinx/files/Acoustic%20and%20Language%20Models/Archive/US%20English%20HUB4WSJ%20Acoustic%20Model/
 
 ## Use pip to install library with python.
 
