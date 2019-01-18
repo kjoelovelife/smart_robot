@@ -34,13 +34,16 @@ if [[ `id -u` -eq 0 ]] ; then
 fi
 
 ## Use APT to download
-sudo apt-get install -y python-opencv
-sudo apt-get install -y libopencv-dev
-sudo apt-get install libbullet-dev
-
+sudo apt-get install -y \
+             python-opencv \
+             libopencv-dev \
+             libbullet-dev \
+             gstreamer0.10-*
+ 
 ## They don't have apt source
 cd ~/smart_robot/catkin_ws/src
 git clone https://github.com/ros/geometry2.git
+git clone https://github.com/mikeferguson/pocketsphinx
 
 ## install path: ~/ros_catkin_ws/src
 #cd ~/ros_catkin_ws
