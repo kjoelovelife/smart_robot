@@ -66,6 +66,18 @@ sudo apt-get install -y \
          ros-kinetic-image-proc \
          python-opencv \
          libopencv-dev
+         python-opencv \
+         libopencv-dev \
+         libbullet-dev 
+         libpulse-dev \
+         libasound2-dev \
+         build-essential \
+         gstreamer0.10-* \
+         python-gst* \
+         python-pyaudio \
+         python-dev \
+         python-pip \
+         git \
  
 
 # These don't have an APT package
