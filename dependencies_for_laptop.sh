@@ -55,7 +55,7 @@ sudo apt-get install -y \
          python-pyaudio \
          python-dev \
          python-pip \
-         git
+         swig
 
 # These don't have an APT package
 
