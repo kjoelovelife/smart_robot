@@ -12,10 +12,10 @@ Smart robot is a low-cost platform base on raspberry pi 3, comes with rpi3 offic
 
 Turtlebot3 e-Manual : http://emanual.robotis.com/docs/en/platform/turtlebot3/autonomous_driving/#turtlebot3-autorace
 
-pocketsphinx setup  : http://blog.michaelchi.net/2017/03/raspberry-pi-3pocketsphinxnode.html
-                      https://pypi.org/project/pocketsphinx/
+pocketsphinx setup  : https://github.com/cmusphinx/pocketsphinx-python
 
 ROS and pocketsphinx: https://github.com/UTNuclearRoboticsPublic/pocketsphinx
+                      http://blog.michaelchi.net/2017/03/raspberry-pi-3pocketsphinxnode.html
 
 ## Developer
 
