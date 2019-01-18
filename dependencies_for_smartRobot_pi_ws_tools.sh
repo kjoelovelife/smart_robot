@@ -37,18 +37,29 @@ fi
 sudo apt-get install -y \
              python-opencv \
              libopencv-dev \
-             libbullet-dev \
+             libbullet-dev 
+             libpulse-dev \
+             libasound2 \
+             build-essential \
              gstreamer0.10-* \
-             python-gst*
+             python-gst* \
+             python-pyaudio \
+             python-dev \
+             python-pip \
+             git \
+             swig
  
 ## They don't have apt source
 cd ~/smart_robot/catkin_ws/src
 git clone https://github.com/ros/geometry2.git
-git clone https://github.com/mikeferguson/pocketsphinx
+# about voice recognition
+git clone https://github.com/UTNuclearRoboticsPublic/pocketsphinx.git
+git clone https://github.com/ros-drivers/audio_common.git
+# Download and copy the hub4wsj_sc_8k language model to /usr/share/pocketsphinx/model/hmm/en_US/. It can be found here
 
 
 ## Use pip to install library with python.
-
+sudo pip install pocketsphinx
 
 
 ## install path: ~/ros_catkin_ws/src
