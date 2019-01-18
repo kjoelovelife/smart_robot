@@ -38,12 +38,18 @@ sudo apt-get install -y \
              python-opencv \
              libopencv-dev \
              libbullet-dev \
-             gstreamer0.10-*
+             gstreamer0.10-* \
+             python-gst*
  
 ## They don't have apt source
 cd ~/smart_robot/catkin_ws/src
 git clone https://github.com/ros/geometry2.git
 git clone https://github.com/mikeferguson/pocketsphinx
+
+
+## Use pip to install library with python.
+
+
 
 ## install path: ~/ros_catkin_ws/src
 #cd ~/ros_catkin_ws
