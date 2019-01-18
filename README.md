@@ -17,6 +17,9 @@ pocketsphinx setup  : https://github.com/cmusphinx/pocketsphinx-python
 ROS and pocketsphinx (source): https://github.com/UTNuclearRoboticsPublic/pocketsphinx 
                     
 ROS and pocketsphinx (blog)  : http://blog.michaelchi.net/2017/03/raspberry-pi-3pocketsphinxnode.html
+
+Another module of language   : https://tw.saowen.com/a/691d0d7f77ba1f9c497c54e636c5ce4ced21a5f0880a99870397e81cf550abe4
+
 ## Developer
 
 *Wei-Chih, Lin (kjoelovelife@gmail.com)
