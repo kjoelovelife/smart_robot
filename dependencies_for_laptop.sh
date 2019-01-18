@@ -82,6 +82,9 @@ sudo apt-get install -y \
 
 # These don't have an APT package
 
+# Use pip to install
+sudo pip install pocketsphinx
+
 # ROS Control App : https://play.google.com/store/apps/details?id=com.robotca.ControlApp
 
 # The following commands allow to use USB port for OpenCR without acquiring root permission.
