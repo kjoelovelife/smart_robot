@@ -57,9 +57,12 @@ git clone https://github.com/UTNuclearRoboticsPublic/pocketsphinx.git
 git clone https://github.com/ros-drivers/audio_common.git
 # Download and copy the hub4wsj_sc_8k language model to /usr/share/pocketsphinx/model/hmm/en_US/. It can be found here
 
+cd ~/smart_robot
+git clone --recursive https://github.com/cmusphinx/pocketsphinx-python/
+cd pocketsphinx-python
+sudo python setup.py install
 
 ## Use pip to install library with python.
-sudo pip install pocketsphinx
 
 
 ## install path: ~/ros_catkin_ws/src
