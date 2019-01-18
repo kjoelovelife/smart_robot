@@ -15,6 +15,7 @@ Turtlebot3 e-Manual : http://emanual.robotis.com/docs/en/platform/turtlebot3/aut
 pocketsphinx setup  : https://github.com/cmusphinx/pocketsphinx-python
 
 ROS and pocketsphinx: https://github.com/UTNuclearRoboticsPublic/pocketsphinx
+
                       http://blog.michaelchi.net/2017/03/raspberry-pi-3pocketsphinxnode.html
 
 ## Developer
