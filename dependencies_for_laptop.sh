@@ -50,6 +50,7 @@ sudo apt-get install -y \
          libpulse-dev \
          libasound2-dev \
          build-essential \
+         gstreamer-1.0-* \
          gstreamer0.10-* \
          python-gst* \
          python-pyaudio \
