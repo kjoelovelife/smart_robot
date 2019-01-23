@@ -1,0 +1,5 @@
+kp: 0.0001 # default:0.0001  , range 0.00001 ~ 0.0025
+kd: 0.0007  # default:0.007  , range 0.001 ~ 0.0001
+x_max_speed: 30 # default:30 , range 0 ~ 126
+z_max_speed: 40 # default:40 , range 0 ~ 126
+desired_center: 200 # default:500 , range: 0 ( yellow ) ~ 599 ( white )
