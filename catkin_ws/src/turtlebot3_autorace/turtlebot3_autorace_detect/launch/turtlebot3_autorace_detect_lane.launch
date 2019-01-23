@@ -1,7 +1,7 @@
 <launch>
   <!-- launch turtlebot3_autorace_extrinsic_camera_calibration.launch before launch this file -->
 
-  <arg name="calibration_mode" default="$(env AUTO_DT_CALIB)" doc="calibration_mode type [calibration, action]"/>
+  <arg name="calibration_mode" default="$(optenv AUTO_DT_CALIB action)" doc="calibration_mode type [calibration, action]"/>
   <param name="desired_center" value="500"/> <!-- range: 0 ( white ) ~ 599 ( yellow ) -->
   <!-- lane detection -->
   <node pkg="turtlebot3_autorace_detect" type="detect_lane" name="detect_lane" output="screen">
