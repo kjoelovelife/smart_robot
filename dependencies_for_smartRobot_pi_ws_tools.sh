@@ -54,7 +54,6 @@ cd ~/smart_robot/catkin_ws/src
 git clone https://github.com/ros/geometry2.git
 # about voice recognition
 git clone https://github.com/UTNuclearRoboticsPublic/pocketsphinx.git
-git clone https://github.com/ros-drivers/audio_common.git
 sudo mkdir -p /usr/share/pocketsphinx/model/hmm/en_US/
 sudo cp -r ~/smart_robot/catkin_ws/src/pocketsphinx/model/hub4wsj_sc_8k /usr/share/pocketsphinx/model/hmm/en_US/
 
