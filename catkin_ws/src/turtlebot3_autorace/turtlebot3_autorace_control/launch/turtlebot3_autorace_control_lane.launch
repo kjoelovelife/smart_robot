@@ -1,9 +1,16 @@
 <launch>
   <!-- launch turtlebot3_autorace_detect_lane.launch before launch this file -->
-  <param name="kp" value="0.0001"/> <!-- range: 0.00001 ~ 0.0025 -->
-  <param name="kd" value="0.0007"/>  <!-- range: 0.001 ~ 0.0001 -->
-  <param name="x_max_speed" value="30.0"/> <!-- range: 0.0 ~ 126.0 -->
-  <param name="z_max_speed" value="40.0"/> <!-- range: 0.0 ~ 126.0 -->
+  <rosparam command="load" file="$(find turtlebot3_autorace_control)/param/control_lane/automove.yaml" />
+
+  <!-- launch extrinsic_camera_calibration file -->
+   <include file="$(find turtlebot3_autorace_camera)/launch/turtlebot3_autorace_extrinsic_camera_calibration.launch">    
+   </include>
+
+  <!-- launch turtlebot3_autorace_detect_lane file -->
+   <include file="$(find turtlebot3_autorace_detect)/launch/turtlebot3_autorace_detect_lane.launch">
+   </include>
+
+
 
   <!-- lane control -->
   <node pkg="turtlebot3_autorace_control" type="control_lane" name="control_lane" output="screen">
