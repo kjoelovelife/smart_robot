@@ -1,7 +1,7 @@
 <launch>
   <!-- launch turtlebot3_autorace_intrinsic_camera_calibration.launch in the raspberry pi before launch this file -->
 
-  <arg name="calibration_mode" default="$(env AUTO_EX_CALIB)" doc="calibration_mode type [calibration, action]"/>
+  <arg name="calibration_mode" default="$(optenv AUTO_EX_CALIB action)" doc="calibration_mode type [calibration, action]"/>
 
   <group ns="camera">
     <!-- image brightness & contrast compensation of ground-projected image -->
