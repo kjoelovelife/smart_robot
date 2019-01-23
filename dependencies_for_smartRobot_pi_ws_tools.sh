@@ -37,7 +37,7 @@ fi
 sudo apt-get install -y \
              python-opencv \
              libopencv-dev \
-             libbullet-dev 
+             libbullet-dev \
              libpulse-dev \
              libasound2-dev \
              build-essential \
