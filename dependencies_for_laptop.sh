@@ -44,6 +44,7 @@ sudo apt-get install -y \
          ros-kinetic-vision-opencv \
          ros-kinetic-opencv3 \
          ros-kinetic-image-proc \
+         ros-kinetic-audio-common \
          python-opencv \
          libopencv-dev \
          libbullet-dev \
