@@ -49,7 +49,8 @@ sudo apt-get install -y \
              python-dev \
              python-pip \
              git \
-             swig
+             swig \
+             mplayer
  
 ## They don't have apt source
 cd ~/smart_robot/catkin_ws/src
