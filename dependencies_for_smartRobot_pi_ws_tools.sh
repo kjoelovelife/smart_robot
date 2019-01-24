@@ -41,6 +41,7 @@ sudo apt-get install -y \
              libpulse-dev \
              libasound2-dev \
              libgstreamer1.0-* \
+             libgstreamer-* \
              build-essential \
              gstreamer0.10-* \
              python-gst* \
