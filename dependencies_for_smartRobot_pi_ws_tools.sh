@@ -65,6 +65,18 @@ sudo cp -r ~/smart_robot/catkin_ws/src/pocketsphinx/model/hub4wsj_sc_8k /usr/sha
 ## Use pip to install library with python.
 sudo pip install pocketsphinx
 
+## Use .dep to install
+sudo dpkg -i ~/smart_robot/audio_common_dependence/raspberrypi/libsphinxbase1_0.8-6_armhf.deb
+sudo dpkg -i ~/smart_robot/audio_common_dependence/raspberrypi/libpocketsphinx1_0.8-5_armhf.deb
+sudo dpkg -i ~/smart_robot/audio_common_dependence/raspberrypi/gstreamer0.10-pocketsphinx_0.8-5_armhf.deb
+
+## add rule for usb device
+sudo cp ~/smart_robot/uno.rules /etc/udev/rules.d/uno.rules.d
+sudo udevadm control --reload-rules 
+sudo udevadm trigger
+
+cd ~/smart_robot/catkin_ws
+
 ## install path: ~/ros_catkin_ws/src
 #cd ~/ros_catkin_ws
 #rosinstall_generator joy \

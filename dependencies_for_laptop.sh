@@ -64,6 +64,14 @@ sudo apt-get install -y \
 # Use pip to install
 sudo pip install pocketsphinx
 
+# use .deb install
+sudo dpkg - i ~/smart_robot/audio_common_dependence/laptop/libsphinxbase1_0.8-6_amd64.deb
+sudo dpkg - i ~/smart_robot/audio_common_dependence/laptop/libpocketsphinx1_0.8-5_amd64.deb
+sudo dpkg - i ~/smart_robot/audio_common_dependence/laptop/libgstreamer-plugins-base0.10-0_0.10.36-2ubuntu0.1_amd64.deb
+sudo dpkg - i ~/smart_robot/audio_common_dependence/laptop/gstreamer0.10-pocketsphinx_0.8-5_amd64.deb
+
+cd ~/smart_robot/catkin_ws
+
 # ROS Control App : https://play.google.com/store/apps/details?id=com.robotca.ControlApp
 
 # The following commands allow to use USB port for OpenCR without acquiring root permission.
