@@ -77,10 +77,11 @@ print(msg)
                     
 def callback(data):
     
-    twist = data      
-    Vy = int(twist.linear.x)
+    twist = data 
+    Vx = int(twist.linear.x)
+    Vy = int(twist.linear.y)
     Vw = int(twist.angular.z)   
-    robot.free_speed( 0, Vy, Vw)
+    robot.free_speed( Vx, Vy, Vw)
 
 ##  start the process  ##
 if __name__ == '__main__':
