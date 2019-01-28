@@ -24,7 +24,9 @@ class recognizer(object):
         rospy.on_shutdown(self.shutdown)
 
         self._hmm_param = "~hmm"
+	self.hmm_status = True
         self._lm_param = "~lm"
+	self.lm_status = False
         self._dict_param = "~dict"
         self._kws_param = "~kws"
         self._stream_param = "~stream"
@@ -43,6 +45,7 @@ class recognizer(object):
 
         if rospy.has_param(self._lm_param):
             self.lm = rospy.get_param(self._lm_param)
+	    self.lm_status = True
 	    rospy.loginfo("Done loading model , {}".format( self.lm ) )
         else:
             rospy.loginfo("Loading the default acoustic model")
@@ -85,7 +88,8 @@ class recognizer(object):
         # Hidden Markov model: The model which has been used
         config.set_string('-hmm', self.hmm)
         # default acoustic model
-        config.set_string('-lm', self.lm)
+	if self.lm_status == True:
+            config.set_string('-lm', self.lm)
         # Pronunciation dictionary used
         config.set_string('-dict', self.lexicon)
         # Keyword list file for keyword searching
