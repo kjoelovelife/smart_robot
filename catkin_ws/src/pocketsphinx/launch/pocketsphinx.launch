@@ -3,7 +3,7 @@
   <arg name="_dict" value="_dict:=$(find pocketsphinx)/vocab/en-us/cmudict-en-us.dict" />
   <arg name="_hmm" value="_hmm:=$(find pocketsphinx)/model/en-us" />
   <arg name="_lm" value="_lm:=$(find pocketsphinx)/vocab/en-us/en-us.lm.bin" />
-  <arg name="_kws" value="_kws:=$(find pocketsphinx)/vocab/voice_cmd.kwlist" />
+  <arg name="_kws" value="_kws:=$(find pocketsphinx)/vocab/en-us/voice_cmd.kwlist" />
   <arg name="_stream" value="_stream:=true" />
   <arg name="_wavpath" value="_wavpath:=none" />
 
