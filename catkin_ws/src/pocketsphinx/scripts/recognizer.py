@@ -24,6 +24,7 @@ class recognizer(object):
         rospy.on_shutdown(self.shutdown)
 
         self._hmm_param = "~hmm"
+        self._lm_param = "~lm"
         self._dict_param = "~dict"
         self._kws_param = "~kws"
         self._stream_param = "~stream"
@@ -33,12 +34,20 @@ class recognizer(object):
         self.pub_ = rospy.Publisher('~output', String, queue_size=1)
 
         if rospy.has_param(self._hmm_param):
-            self.lm = rospy.get_param(self._hmm_param)
+            self.hmm = rospy.get_param(self._hmm_param)
 	    rospy.loginfo("Done loading model , {}".format( self.hmm ) )
         else:
+            rospy.loginfo("Loading the Hidden Markov model model")
+            self.hmm = os.path.expanduser("~/smart_robot/catkin_ws/src/pocketsphinx/model/hub4wsj_sc_8k")
+            rospy.loginfo("Done loading the default Hidden Markov model , /model/hub4wsj_sc_8k")
+
+        if rospy.has_param(self._lm_param):
+            self.lm = rospy.get_param(self._lm_param)
+	    rospy.loginfo("Done loading model , {}".format( self.lm ) )
+        else:
             rospy.loginfo("Loading the default acoustic model")
-            self.lm = "/usr/share/pocketsphinx/model/hmm/en_US/hub4wsj_sc_8k"
-            rospy.loginfo("Done loading the default acoustic model")
+            self.lm = os.path.expanduser("~/smart_robot/catkin_ws/src/pocketsphinx/vocab/en-us/en-us.lm.bin")
+            rospy.loginfo("Done loading the default acoustic model, /vocab/en-us/en-us.lm.bin")
 
         if rospy.has_param(self._dict_param):
             self.lexicon = rospy.get_param(self._dict_param)
@@ -75,6 +84,8 @@ class recognizer(object):
 
         # Hidden Markov model: The model which has been used
         config.set_string('-hmm', self.hmm)
+        # default acoustic model
+        config.set_string('-lm', self.lm)
         # Pronunciation dictionary used
         config.set_string('-dict', self.lexicon)
         # Keyword list file for keyword searching
