@@ -23,7 +23,7 @@ class recognizer(object):
         rospy.init_node("recognizer")
         rospy.on_shutdown(self.shutdown)
 
-        self._lm_param = "~lm"
+        self._hmm_param = "~hmm"
         self._dict_param = "~dict"
         self._kws_param = "~kws"
         self._stream_param = "~stream"
@@ -32,9 +32,9 @@ class recognizer(object):
         # you may need to change publisher destination depending on what you run
         self.pub_ = rospy.Publisher('~output', String, queue_size=1)
 
-        if rospy.has_param(self._lm_param):
-            self.lm = rospy.get_param(self._lm_param)
-	    rospy.loginfo("Done loading model , {}".format( self.lm ) )
+        if rospy.has_param(self._hmm_param):
+            self.lm = rospy.get_param(self._hmm_param)
+	    rospy.loginfo("Done loading model , {}".format( self.hmm ) )
         else:
             rospy.loginfo("Loading the default acoustic model")
             self.lm = "/usr/share/pocketsphinx/model/hmm/en_US/hub4wsj_sc_8k"
@@ -74,7 +74,7 @@ class recognizer(object):
         rospy.loginfo("Done initializing pocketsphinx")
 
         # Hidden Markov model: The model which has been used
-        config.set_string('-hmm', self.lm)
+        config.set_string('-hmm', self.hmm)
         # Pronunciation dictionary used
         config.set_string('-dict', self.lexicon)
         # Keyword list file for keyword searching
