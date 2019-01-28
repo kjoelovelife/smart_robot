@@ -1,12 +1,12 @@
 <launch>
 
-  <arg name="_dict" value="_dict:=$(find pocketsphinx)/vocab/en-us/cmudict-en-us.dict" />
-  <arg name="_hmm" value="_hmm:=$(find pocketsphinx)/model/en-us" />
-  <arg name="_lm" value="_lm:=$(find pocketsphinx)/vocab/en-us/en-us.lm.bin" />
-  <arg name="_kws" value="_kws:=$(find pocketsphinx)/vocab/en-us/voice_cmd.kwlist" />
+  <arg name="_dict" value="_dict:=$(find pocketsphinx)/vocab/hub4wsj_sc_8k/voice_cmd.dic" />
+  <arg name="_hmm" value="_hmm:=$(find pocketsphinx)/model/hub4wsj_sc_8k" />
+  <arg name="_lm" value="_lm:=$(find pocketsphinx)/vocab/en-us/en-us.lm.bin" /> <!-- not essential -->
+  <arg name="_kws" value="_kws:=$(find pocketsphinx)/vocab/hub4wsj_sc_8k/voice_cmd.kwlist" />
   <arg name="_stream" value="_stream:=true" />
   <arg name="_wavpath" value="_wavpath:=none" />
 
-  <node name="pocketsphinx_recognizer" pkg="pocketsphinx" type="recognizer.py" output="screen" args="$(arg _dict) $(arg _hmm) $(arg _kws) $(arg _stream) $(arg _wavpath)" />
+  <node name="pocketsphinx_recognizer" pkg="pocketsphinx" type="recognizer_test.py" output="screen" args="$(arg _dict) $(arg _hmm) $(arg _kws) $(arg _stream) $(arg _wavpath)" />
 
 </launch>
