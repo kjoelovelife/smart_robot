@@ -17,7 +17,7 @@ key_word = {
 
 def callback(data):
     word = data.data
-    if word.find( str(key_word.keys()) ):    
+    if word in str(key_word.keys()):    
         print(word)
         twist.linear.x = key_word[word][0]
         twist.linear.y = key_word[word][1]
