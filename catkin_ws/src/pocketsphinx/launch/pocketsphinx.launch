@@ -7,6 +7,6 @@
   <arg name="_stream" value="_stream:=true" />
   <arg name="_wavpath" value="_wavpath:=none" />
 
-  <node name="pocketsphinx_recognizer" pkg="pocketsphinx" type="recognizer_test.py" output="screen" args="$(arg _dict) $(arg _hmm) $(arg _kws) $(arg _stream) $(arg _wavpath)" />
+  <node name="pocketsphinx_recognizer" pkg="pocketsphinx" type="recognizer.py" output="screen" args="$(arg _dict) $(arg _hmm) $(arg _kws) $(arg _stream) $(arg _wavpath)" />
 
 </launch>
