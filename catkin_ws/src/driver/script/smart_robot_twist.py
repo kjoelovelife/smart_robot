@@ -97,6 +97,8 @@ if __name__ == '__main__':
 
     while(True):       
         if rospy.is_shutdown() == True:
+            for i in range(3):
+                robot.free_speed( 0, 0, 0)
             robot.disconnect()
             print''
             break
