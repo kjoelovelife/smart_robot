@@ -28,3 +28,6 @@ Another module of language   : https://tw.saowen.com/a/691d0d7f77ba1f9c497c54e63
 
 *Wei-Chih, Lin (kjoelovelife@gmail.com)
 
+## Usage & Tutorial
+
+* Step 1. install Dependencies
