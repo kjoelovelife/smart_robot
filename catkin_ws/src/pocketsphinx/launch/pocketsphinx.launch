@@ -7,6 +7,9 @@
   <arg name="_stream" value="_stream:=true" />
   <arg name="_wavpath" value="_wavpath:=none" />
 
+  <!-- voice recognization -->
   <node name="pocketsphinx_recognizer" pkg="pocketsphinx" type="recognizer.py" output="screen" args="$(arg _dict) $(arg _hmm) $(arg _kws) $(arg _stream) $(arg _wavpath)" />
 
+  <!-- publish Msg " twist " -->
+  <node name="voice_control" pkg="pocketsphinx" type="voice_control.py" />
 </launch>
