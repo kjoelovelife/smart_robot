@@ -100,3 +100,52 @@ Open the terminal on laptop , and enter
 
 ` roscore `
 
+* Step 3. Run launch file  " pocketsphinx.launch " on raspberrypi
+
+' roslaunch pocketsphinx pocketsphinx.launch '
+
+* Step 4. Run node " smart_robot_twist.py " on raspberry pi 
+
+` rosrun driver smart_robot_twist.py `
+
+After you finish Step 4 , now you can speak sonething let smart robot to recongnize . You can find " voice_cmd.kwlist " in package " pocketsphinx/vocab " ,and then search what word can smart robot recongnize. if you say the key word , such as " go " , smart robot will go foward . 
+
+* Step 5. use topic " /pocketsphinx_recognizer/output  " on laptop to find what word smart robot recongnize
+
+` rostopic echo /pocketsphinx_recognizer/output `
+
+## use image recognition to go on the simulation road ( AutoRace )
+
+* Step 1. design your road 
+
+There are two color lines  on The road : Yellow and White .
+
+And you just need to note one important thing : yellow line should be placed on the left side of the robot, and of course, white line should be placed on the right side of the smart robot.
+
+More information can read " 智慧機器人使用手冊_20190220_V1.pdf " , chapter 8-1 .
+
+* Step 2. Running ROS across multiple machines
+
+More information can read step 1 in " moving the smart_robot "
+
+* Step 3. Run Master on laptop
+
+Open the terminal on laptop , and enter 
+
+` roscore `
+
+* Step 4. Run launch file  " turtlebot3_autorace_detect_lane_intrinsic.launch  "  on raspberrypi
+
+' roslaunch turtlebot3_autorace_camera turtlebot3_autorace_detect_lane_intrinsic.launch '
+
+* Step 5. Run launch file  " turtlebot3_autorace_control_lane.launch  "  on laptop
+
+' roslaunch turtlebot3_autorace_control turtlebot3_autorace_control_lane.launch '
+
+* Step 6. Run node " smart_robot_twist.py " on raspberry pi 
+
+` rosrun driver smart_robot_twist.py `
+
+After finish Step 6 , smart robot will start moving.
+
+if you want to modified the paramter to adjust smart robot , you can search " automove.yaml " , in package " turtlebot3_autorace_control/param/control_lane "
