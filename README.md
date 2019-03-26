@@ -42,7 +42,7 @@ About raspeaker card : https://github.com/respeaker/seeed-voicecard
 
 *Wei-Chih, Lin (kjoelovelife@gmail.com)
 
-# Usage & Tutorial on PI
+# Usage & Tutorial
 
 ## The  Startup sequence of the smart robort
 
