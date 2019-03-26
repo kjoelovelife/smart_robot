@@ -14,6 +14,8 @@ Smart robot is a low-cost platform base on raspberry pi 3, comes with rpi3 offic
 
 ## reference
 
+Install ROS Kinetic on Raspberry Pi 3 : https://www.intorobotics.com/how-to-install-ros-kinetic-on-raspberry-pi-3-running-raspbian-stretch-lite/ 
+
 Turtlebot3 e-Manual : http://emanual.robotis.com/docs/en/platform/turtlebot3/autonomous_driving/#turtlebot3-autorace
 
 pocketsphinx setup  : https://github.com/cmusphinx/pocketsphinx-python
