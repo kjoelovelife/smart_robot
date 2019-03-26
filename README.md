@@ -54,11 +54,11 @@ Another module of language with pocketsphinx   : https://tw.saowen.com/a/691d0d7
 
 Open the terminal on PI , then change directory to " smart_robot " ,then source " dependencies_for_smartRobot_pi_ws_tools.sh "
 
-` cd ~/smart_roboot && source  dependencies_for_smartRobot_pi_ws_tools.sh `
+  ` cd ~/smart_roboot && source  dependencies_for_smartRobot_pi_ws_tools.sh `
 
 * Step 2. build work space
 
-` cd ~/smart_roboot/catkin_ws && catkin_make `
+  ` cd ~/smart_roboot/catkin_ws && catkin_make `
 
 ## move the smart_robot
 
@@ -76,15 +76,15 @@ And In this example , we use laptop to be the Master.
 
 Open the terminal on laptop , and enter 
 
-` roscore `
+  ` roscore `
 
 * Step 3. Run node " smart_robot_teleop_key.py " on laptop
 
-` rosrun driver smart_robot_teleop_key.py	`
+  ` rosrun driver smart_robot_teleop_key.py	`
 
 * Step 4. Run node " smart_robot_teleop_key.py " on raspberry pi 
 
-` rosrun driver smart_robot_twist.py `
+  ` rosrun driver smart_robot_twist.py `
 
 After you finish Step 4 , then you can use keyboard on laptop to control the smart robot , remember and check you are use the terminal of smart_robot_teleop_key.py , and it will show you how to use.   
 
@@ -98,21 +98,21 @@ More information can read step 1 in " moving the smart_robot "
 
 Open the terminal on laptop , and enter 
 
-` roscore `
+  ` roscore `
 
 * Step 3. Run launch file  " pocketsphinx.launch " on raspberrypi
 
-` roslaunch pocketsphinx pocketsphinx.launch `
+  ` roslaunch pocketsphinx pocketsphinx.launch `
 
 * Step 4. Run node " smart_robot_twist.py " on raspberry pi 
 
-` rosrun driver smart_robot_twist.py `
+  ` rosrun driver smart_robot_twist.py `
 
 After you finish Step 4 , now you can speak sonething let smart robot to recongnize . You can find " voice_cmd.kwlist " in package " pocketsphinx/vocab " ,and then search what word can smart robot recongnize. if you say the key word , such as " go " , smart robot will go foward . 
 
 * Step 5. use topic " /pocketsphinx_recognizer/output  " on laptop to find what word smart robot recongnize
 
-` rostopic echo /pocketsphinx_recognizer/output `
+  ` rostopic echo /pocketsphinx_recognizer/output `
 
 ## use image recognition to go on the simulation road ( AutoRace )
 
@@ -132,19 +132,19 @@ More information can read step 1 in " moving the smart_robot "
 
 Open the terminal on laptop , and enter 
 
-` roscore `
+  ` roscore `
 
 * Step 4. Run launch file  " turtlebot3_autorace_detect_lane_intrinsic.launch  "  on raspberrypi
 
-` roslaunch turtlebot3_autorace_camera turtlebot3_autorace_detect_lane_intrinsic.launch `
+  ` roslaunch turtlebot3_autorace_camera turtlebot3_autorace_detect_lane_intrinsic.launch `
 
 * Step 5. Run launch file  " turtlebot3_autorace_control_lane.launch  "  on laptop
 
-` roslaunch turtlebot3_autorace_control turtlebot3_autorace_control_lane.launch `
+  ` roslaunch turtlebot3_autorace_control turtlebot3_autorace_control_lane.launch `
 
 * Step 6. Run node " smart_robot_twist.py " on raspberry pi 
 
-` rosrun driver smart_robot_twist.py `
+  ` rosrun driver smart_robot_twist.py `
 
 After finish Step 6 , smart robot will start moving.
 
