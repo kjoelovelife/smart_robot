@@ -10,17 +10,21 @@ This repository contains all the software that runs on the Smart robot , makerla
 
 * makerlab : https://www.makerlab.tw/
 
-Smart robot is a low-cost platform base on raspberry pi 3, comes with rpi3 official camera , ReSpeaker 4-Mic Array , and also a Omini wheels driver. 
+Smart robot is a low-cost platform base on raspberry pi 3, comes with rpi3 official camera , ReSpeaker 4-Mic Array , ultrasonic and also a Omini wheels driver. 
+
+Microcontroller on Motor-controller is STM32F103RCT6 , with sensor MPU-9250 . 
 
 The system is use Raspbian , Download image from https://www.raspberrypi.org/downloads/raspbian/ . 
 
-# How to buy the part cmponents?
+If you buy " Smart robot "　from IcShop ( https://www.icshop.com.tw/product_info.php/products_id/27051 ) , will contain the " Raspbian " system and can use ROS . The password is our telephone number " 5564686 ".   
+
+## How to buy the part cmponents?
 
 you can buy theese all cmponents on it : https://www.icshop.com.tw/index.php
 
 ## reference
 
-Install ROS Kinetic on Raspberry Pi 3 : https://www.intorobotics.com/how-to-install-ros-kinetic-on-raspberry-pi-3-running-raspbian-stretch-lite/ 
+Install ROS Kinetic on Raspbian with Raspberry Pi 3 : https://www.intorobotics.com/how-to-install-ros-kinetic-on-raspberry-pi-3-running-raspbian-stretch-lite/ 
 
 Turtlebot3 e-Manual : http://emanual.robotis.com/docs/en/platform/turtlebot3/autonomous_driving/#turtlebot3-autorace
 
@@ -36,13 +40,19 @@ Another module of language with pocketsphinx   : https://tw.saowen.com/a/691d0d7
 
 *Wei-Chih, Lin (kjoelovelife@gmail.com)
 
-## Usage & Tutorial on PI
+# Usage & Tutorial on PI
 
-# creat environment for using smart_robot 
+## The  Startup sequence of the smart robort
+
+* Step 1. Start the motor-controller   
+
+* Step 2. Start Raspberry pi    
+
+## creat environment for using smart_robot 
 
 * Step 1. install Dependencies
 
-Open the Terminal on PI , then change directory to " smart_robot " ,then source " dependencies_for_smartRobot_pi_ws_tools.sh "
+Open the terminal on PI , then change directory to " smart_robot " ,then source " dependencies_for_smartRobot_pi_ws_tools.sh "
 
 ` cd ~/smart_roboot && source  dependencies_for_smartRobot_pi_ws_tools.sh `
 
@@ -50,7 +60,7 @@ Open the Terminal on PI , then change directory to " smart_robot " ,then source 
 
 ` cd ~/smart_roboot/catkin_ws && catkin_make `
 
-# move the smart_robot
+## move the smart_robot
 
 * Step 1. Running ROS across multiple machines
 
@@ -62,4 +72,18 @@ For Emglish          : https://www.intorobotics.com/how-to-setup-ros-kinetic-to-
 
 And In this example , we use laptop to be the Master. 
 
-* Step 2. Running ROS across multiple machines
+* Step 2. Run Master on laptop
+
+Open the terminal on laptop , and enter 
+
+` roscore `
+
+* Step 3. Run node " smart_robot_teleop_key.py " on laptop
+
+` rosrun driver smart_robot_teleop_key.py	`
+
+* Step 4. Run node " smart_robot_teleop_key.py " on raspberry pi 
+
+` rosrun driver smart_robot_twist.py `
+
+After you finish Step4 , then you can use keyboard on laptop to control the smart robot , remember and check you are use the terminal of smart_robot_teleop_key.py , and it will show you how to use.   
