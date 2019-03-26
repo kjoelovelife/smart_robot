@@ -50,9 +50,7 @@ Another module of language with pocketsphinx   : https://tw.saowen.com/a/691d0d7
 
 ## creat environment for using smart_robot 
 
-* Step 1. install Dependencies
-
-Open the terminal on PI , then change directory to " smart_robot " ,then source " dependencies_for_smartRobot_pi_ws_tools.sh "
+* Step 1. install Dependencies. Open the terminal on PI , then change directory to " smart_robot " ,then source " dependencies_for_smartRobot_pi_ws_tools.sh "
 
   ` cd ~/smart_roboot && source  dependencies_for_smartRobot_pi_ws_tools.sh `
 
@@ -72,9 +70,7 @@ For Emglish          : https://www.intorobotics.com/how-to-setup-ros-kinetic-to-
 
 And In this example , we use laptop to be the Master. 
 
-* Step 2. Run Master on laptop
-
-Open the terminal on laptop , and enter 
+* Step 2. Run Master on laptop , Open the terminal on laptop , and enter 
 
   ` roscore `
 
@@ -94,9 +90,7 @@ After you finish Step 4 , then you can use keyboard on laptop to control the sma
 
 More information can read step 1 in " moving the smart_robot "
 
-* Step 2. Run Master on laptop
-
-Open the terminal on laptop , and enter 
+* Step 2. Run Master on laptop , Open the terminal on laptop , and enter 
 
   ` roscore `
 
@@ -128,9 +122,7 @@ More information can read " 智慧機器人使用手冊_20190220_V1.pdf " , chap
 
 More information can read step 1 in " moving the smart_robot "
 
-* Step 3. Run Master on laptop
-
-Open the terminal on laptop , and enter 
+* Step 3. Run Master on lapto, Open the terminal on laptop , and enter 
 
   ` roscore `
 
