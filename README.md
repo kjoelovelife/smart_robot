@@ -86,4 +86,17 @@ Open the terminal on laptop , and enter
 
 ` rosrun driver smart_robot_twist.py `
 
-After you finish Step4 , then you can use keyboard on laptop to control the smart robot , remember and check you are use the terminal of smart_robot_teleop_key.py , and it will show you how to use.   
+After you finish Step 4 , then you can use keyboard on laptop to control the smart robot , remember and check you are use the terminal of smart_robot_teleop_key.py , and it will show you how to use.   
+
+## use speech recognition to control smart robot
+
+* Step 1. Running ROS across multiple machines
+
+More information can read step 1 in " moving the smart_robot "
+
+* Step 2. Run Master on laptop
+
+Open the terminal on laptop , and enter 
+
+` roscore `
+
