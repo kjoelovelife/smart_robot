@@ -12,6 +12,8 @@ This repository contains all the software that runs on the Smart robot , makerla
 
 Smart robot is a low-cost platform base on raspberry pi 3, comes with rpi3 official camera, wide-angle len, and is a Omini wheels driver.
 
+The system is use Raspbian , Download image from https://www.raspberrypi.org/downloads/raspbian/ . 
+
 ## reference
 
 Install ROS Kinetic on Raspberry Pi 3 : https://www.intorobotics.com/how-to-install-ros-kinetic-on-raspberry-pi-3-running-raspbian-stretch-lite/ 
@@ -30,6 +32,12 @@ Another module of language   : https://tw.saowen.com/a/691d0d7f77ba1f9c497c54e63
 
 *Wei-Chih, Lin (kjoelovelife@gmail.com)
 
-## Usage & Tutorial
+## Usage & Tutorial on PI
 
 * Step 1. install Dependencies
+
+Open the Terminal on PI , then change directory to " smart_robot " ,then source " dependencies_for_smartRobot_pi_ws_tools.sh "
+
+` cd ~/smart_roboot`
+
+` source  dependencies_for_smartRobot_pi_ws_tools.sh `
