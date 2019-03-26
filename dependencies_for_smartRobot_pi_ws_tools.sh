@@ -118,7 +118,7 @@ wstool merge -t src ros_kinetic_smartRobot.rosinstall
 wstool update -t src
 
 rosdep install --from-paths src --ignore-src --rosdistro kinetic -y -r --os=debian:stretch
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILED_TYPE=Release --install-space /opt/ros/kinetic
+sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILED_TYPE=Release --install-space /opt/ros/kinetic -j1
 
 # ROS Control App : https://play.google.com/store/apps/details?id=com.robotca.ControlApp
 
