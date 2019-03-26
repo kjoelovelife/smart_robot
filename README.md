@@ -102,7 +102,7 @@ Open the terminal on laptop , and enter
 
 * Step 3. Run launch file  " pocketsphinx.launch " on raspberrypi
 
-' roslaunch pocketsphinx pocketsphinx.launch '
+` roslaunch pocketsphinx pocketsphinx.launch `
 
 * Step 4. Run node " smart_robot_twist.py " on raspberry pi 
 
@@ -136,11 +136,11 @@ Open the terminal on laptop , and enter
 
 * Step 4. Run launch file  " turtlebot3_autorace_detect_lane_intrinsic.launch  "  on raspberrypi
 
-' roslaunch turtlebot3_autorace_camera turtlebot3_autorace_detect_lane_intrinsic.launch '
+` roslaunch turtlebot3_autorace_camera turtlebot3_autorace_detect_lane_intrinsic.launch `
 
 * Step 5. Run launch file  " turtlebot3_autorace_control_lane.launch  "  on laptop
 
-' roslaunch turtlebot3_autorace_control turtlebot3_autorace_control_lane.launch '
+` roslaunch turtlebot3_autorace_control turtlebot3_autorace_control_lane.launch `
 
 * Step 6. Run node " smart_robot_twist.py " on raspberry pi 
 
