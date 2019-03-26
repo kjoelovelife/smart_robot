@@ -51,7 +51,13 @@ sudo apt-get install -y \
              git \
              swig \
              mplayer
- 
+
+## ReSpeaker 4 Mic Array
+cd ~/smart_robot
+git clone https://github.com/respeaker/seeed-voicecard.git
+cd ~/smart_robot/seeed-voicecard.git
+sudo ./install.sh 
+
 ## They don't have apt source
 cd ~/smart_robot/catkin_ws/src
 git clone https://github.com/ros/geometry2.git
