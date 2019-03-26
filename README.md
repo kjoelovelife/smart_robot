@@ -62,13 +62,13 @@ Another module of language with pocketsphinx   : https://tw.saowen.com/a/691d0d7
 
 * Step 1. Running ROS across multiple machines
 
-If you don't understand how to use it , you can visit these website : 
+  If you don't understand how to use it , you can visit these website : 
 
-For Mandarin chinese : https://www.makerlab.tw/blog/_ros2
+  For Mandarin chinese : https://www.makerlab.tw/blog/_ros2
 
-For Emglish          : https://www.intorobotics.com/how-to-setup-ros-kinetic-to-communicate-between-raspberry-pi-3-and-a-remote-linux-pc/
+  For Emglish          : https://www.intorobotics.com/how-to-setup-ros-kinetic-to-communicate-between-raspberry-pi-3-and-a-remote-linux-pc/
 
-And In this example , we use laptop to be the Master. 
+  And In this example , we use laptop to be the Master. 
 
 * Step 2. Run Master on laptop , Open the terminal on laptop , and enter 
 
@@ -82,13 +82,13 @@ And In this example , we use laptop to be the Master.
 
   ` rosrun driver smart_robot_twist.py `
 
-After you finish Step 4 , then you can use keyboard on laptop to control the smart robot , remember and check you are use the terminal of smart_robot_teleop_key.py , and it will show you how to use.   
+  After you finish Step 4 , then you can use keyboard on laptop to control the smart robot , remember and check you are use the terminal of smart_robot_teleop_key.py , and it will show you how to use.   
 
 ## use speech recognition to control smart robot
 
 * Step 1. Running ROS across multiple machines
 
-More information can read step 1 in " moving the smart_robot "
+  More information can read step 1 in " moving the smart_robot "
 
 * Step 2. Run Master on laptop , Open the terminal on laptop , and enter 
 
@@ -102,7 +102,7 @@ More information can read step 1 in " moving the smart_robot "
 
   ` rosrun driver smart_robot_twist.py `
 
-After you finish Step 4 , now you can speak sonething let smart robot to recongnize . You can find " voice_cmd.kwlist " in package " pocketsphinx/vocab " ,and then search what word can smart robot recongnize. if you say the key word , such as " go " , smart robot will go foward . 
+  After you finish Step 4 , now you can speak sonething let smart robot to recongnize . You can find " voice_cmd.kwlist " in package " pocketsphinx/vocab " ,and then search what word can smart robot recongnize. if you say the key word , such as " go " , smart robot will go foward . 
 
 * Step 5. use topic " /pocketsphinx_recognizer/output  " on laptop to find what word smart robot recongnize
 
@@ -112,15 +112,15 @@ After you finish Step 4 , now you can speak sonething let smart robot to recongn
 
 * Step 1. design your road 
 
-There are two color lines  on The road : Yellow and White .
+  There are two color lines  on The road : Yellow and White .
 
-And you just need to note one important thing : yellow line should be placed on the left side of the robot, and of course, white line should be placed on the right side of the smart robot.
+  And you just need to note one important thing : yellow line should be placed on the left side of the robot, and of course, white line should be placed on the right side of the smart robot.
 
-More information can read " 智慧機器人使用手冊_20190220_V1.pdf " , chapter 8-1 .
+  More information can read " 智慧機器人使用手冊_20190220_V1.pdf " , chapter 8-1 .
 
 * Step 2. Running ROS across multiple machines
 
-More information can read step 1 in " moving the smart_robot "
+  More information can read step 1 in " moving the smart_robot "
 
 * Step 3. Run Master on lapto, Open the terminal on laptop , and enter 
 
@@ -138,6 +138,6 @@ More information can read step 1 in " moving the smart_robot "
 
   ` rosrun driver smart_robot_twist.py `
 
-After finish Step 6 , smart robot will start moving.
+  After finish Step 6 , smart robot will start moving.
 
-if you want to modified the paramter to adjust smart robot , you can search " automove.yaml " , in package " turtlebot3_autorace_control/param/control_lane "
+  if you want to modified the paramter to adjust smart robot , you can search " automove.yaml " , in package " turtlebot3_autorace_control/param/control_lane "
