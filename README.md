@@ -132,7 +132,7 @@ More information can read step 1 in " moving the smart_robot "
 
 Open the terminal on laptop , and enter 
 
-    ` roscore `
+  ` roscore `
 
 * Step 4. Run launch file  " turtlebot3_autorace_detect_lane_intrinsic.launch  "  on raspberrypi
 
