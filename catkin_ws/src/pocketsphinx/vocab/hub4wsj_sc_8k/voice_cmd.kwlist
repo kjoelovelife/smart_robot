@@ -21,3 +21,5 @@ FORWARD /1e-1/
 BACKWARD /1e-1/
 GO /1e-1/
 BACK /1e-1/
+LEFT /1e-1/
+RIGHT /1e-1/
