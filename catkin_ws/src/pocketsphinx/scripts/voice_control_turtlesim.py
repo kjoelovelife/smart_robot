@@ -11,7 +11,7 @@ from geometry_msgs.msg import Twist
 key_word = {
              "go ":(2,0,0,0,0,0),
              "stop ":(0,0,0,0,0,0),
-             "back ":(0,-2,0,0,0,0),
+             "backward ":(0,-2,0,0,0,0),
              "left ":(0,0,0,0,0,2),
              "right ":(0,0,0,0,0,-2)
            }
