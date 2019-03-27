@@ -34,7 +34,7 @@ ROS and pocketsphinx (source): https://github.com/UTNuclearRoboticsPublic/pocket
                     
 ROS and pocketsphinx (blog)  : http://blog.michaelchi.net/2017/03/raspberry-pi-3pocketsphinxnode.html
 
-Another module of language with pocketsphinx   : https://tw.saowen.com/a/691d0d7f77ba1f9c497c54e636c5ce4ced21a5f0880a99870397e81cf550abe4
+Another module of language with pocketsphinx   : https://sourceforge.net/projects/cmusphinx/files/Acoustic%20and%20Language%20Models/
 
 About raspeaker card : https://github.com/respeaker/seeed-voicecard
 
