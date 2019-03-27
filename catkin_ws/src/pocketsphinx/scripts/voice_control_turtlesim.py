@@ -41,7 +41,7 @@ if __name__ == '__main__':
     twist.angular.z = 0
 
     ## initialize
-    rospy.init_node('voice_control', anonymous=True)
+    rospy.init_node('voice_control_turtlesim', anonymous=True)
     pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size = 1)
     while(True):       
         if rospy.is_shutdown() == True:
