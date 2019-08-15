@@ -80,7 +80,7 @@ def callback(data):
     twist = data 
     Vx = int(twist.linear.x)
     Vy = int(twist.linear.y)
-    Vw = int(twist.angular.z)   
+    Vw = -1 * int(twist.angular.z)   
     robot.free_speed( Vx, Vy, Vw)
 
 ##  start the process  ##
