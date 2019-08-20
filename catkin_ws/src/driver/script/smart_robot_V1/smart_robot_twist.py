@@ -34,7 +34,7 @@
 ## import library
 import sys, time , select, tty ,termios
 import numpy as np
-from smart_robot import smart_robot
+from smart_robot_driver import Smart_robot
 
 ## import ROS library
 import rospy
@@ -80,7 +80,7 @@ def callback(data):
     twist = data 
     Vx = int(twist.linear.x)
     Vy = int(twist.linear.y)
-    Vw = -1 * int(twist.angular.z)   
+    Vw = int(twist.angular.z) * -1  
     robot.free_speed( Vx, Vy, Vw)
 
 ##  start the process  ##
@@ -92,7 +92,7 @@ if __name__ == '__main__':
     ## set serial communication
     port  = "/dev/smart_robot"     #port = "" for linux
     baud  = 115200
-    robot = smart_robot(port,baud)
+    robot = Smart_robot(port,baud)
     robot.connect()
 
     while(True):       

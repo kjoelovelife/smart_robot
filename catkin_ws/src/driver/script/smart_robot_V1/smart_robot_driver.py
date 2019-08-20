@@ -35,7 +35,7 @@
 import numpy as np
 from serial import Serial
 
-class smart_robot():
+class Smart_robot():
     def __init__(self,port,baud):
     
         ## setup connect parameter
@@ -189,8 +189,8 @@ class smart_robot():
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
 
-    ## rotate counterclockwise [speed]A => speed < 127    
-    def rotate_counterclockwise(self): 
+    ## rotate clockwise [speed]A => speed > 127    
+    def rotate_clockwise(self): 
         self.vx = self.move_speed['e'][0] + self.stop_speed
         self.vy = self.move_speed['e'][1] + self.stop_speed   
         self.w  = self.move_speed['e'][2] + self.stop_speed                
@@ -201,8 +201,8 @@ class smart_robot():
         if self.connected == True:
             self.microcontroller.write( bytes( self.send_signal) )
 
-    ## rotate clockwise  [speed]A => speed > 127    
-    def rotate_clockwise(self): 
+    ## rotate counterclockwise  [speed]A => speed < 127    
+    def rotate_counterclockwise(self): 
         self.vx = self.move_speed['q'][0] + self.stop_speed
         self.vy = self.move_speed['q'][1] + self.stop_speed   
         self.w  = self.move_speed['q'][2] + self.stop_speed                
