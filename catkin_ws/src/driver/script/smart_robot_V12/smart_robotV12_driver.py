@@ -88,32 +88,25 @@ class smart_robotV12():
         clamp = lambda n, minn, maxn: max(min(maxn, n), minn)
         speed = bytearray(b'\xFF\xFE')
         speed.append(0x01)
-        speed += struct.pack('>h',clamp( abs(veh_cmd[0]), 0, 65536 ) ) # 2-bytes , velocity for x axis 
-        speed += struct.pack('>h',clamp( abs(veh_cmd[1]), 0, 65536 ))  # 2-bytes , velocity for y axis 
+        speed += struct.pack('>h',clamp( abs(veh_cmd[1]), 0, 65536 ) ) # 2-bytes , velocity for x axis 
+        speed += struct.pack('>h',clamp( abs(veh_cmd[0]), 0, 65536 ))  # 2-bytes , velocity for y axis 
         speed += struct.pack('>h',clamp( abs(veh_cmd[2]), 0, 65536 ))  # 2-bytes , velocity for z axis 
 
-        if veh_cmd[2] > 0 : 
-            if veh_cmd[1] > 0:
-                if veh_cmd[0] > 0:
-                    direction = 0
-                else : 
-                    direction = 4
-            else:
-                if veh_cmd[0] > 0:
-                    direction = 2
-                else : 
-                    direction = 6
+        if veh_cmd[1] > 0:
+            direction_x = 4
         else:
-            if veh_cmd[1] > 0:
-                if veh_cmd[0] > 0:
-                    direction = 1
-                else : 
-                    direction = 5
-            else:
-                if veh_cmd[0] > 0:
-                    direction = 3
-                else : 
-                    direction = 7
+            direction_x = 0
+        if veh_cmd[0] > 0:
+            direction_y = 0
+        else:
+            direction_y = 2
+        if veh_cmd[2] > 0:
+            direction_z = 0
+        else:
+            direction_z = 1
+
+        direction = direction_x + direction_y + direction_z
+        print("Direction: {}".format(direction))
 
         # 1-bytes , direction for x(bit2) ,y(bit1) ,z(bit0) ,and 0 : normal , 1 : reverse
         speed += struct.pack('>b',direction)  

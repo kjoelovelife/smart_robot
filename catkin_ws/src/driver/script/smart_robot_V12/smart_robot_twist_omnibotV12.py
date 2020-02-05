@@ -84,7 +84,8 @@ def callback(data):
     twist = data 
     veh_cmd["Vx"] = twist.linear.x * vel_gain
     veh_cmd["Vy"] = twist.linear.y * vel_gain
-    veh_cmd["Omega"] = twist.angular.z * vel_gain * (-1)
+    veh_cmd["Omega"] = twist.angular.z * vel_gain
+    #print(" Vx : {} , Vy : {} , Vz : {}".format(veh_cmd["Vx"],veh_cmd["Vy"] ,veh_cmd["Omega"]))
     tx_vel_cmd()
 
 def tx_vel_cmd():

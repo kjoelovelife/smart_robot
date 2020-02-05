@@ -38,8 +38,8 @@ import sys, select, termios, tty
 SMARTROBOT_MAX_LIN_VEL = 4
 SMARTROBOT_MAX_ANG_VEL = 1
 
-LIN_VEL_STEP_SIZE = 0.1
-ANG_VEL_STEP_SIZE = 0.1
+LIN_VEL_STEP_SIZE = 0.05
+ANG_VEL_STEP_SIZE = 0.05
 
 msg = """
 ---------------------------
