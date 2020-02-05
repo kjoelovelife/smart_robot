@@ -63,7 +63,7 @@ sudo apt-get install -y \
 
 # These don't have an APT package
 
-if [ "${hardware_platform}" == "amd64" ] ; then
+if [ "${hardware_platform}" == "x86_64" ] ; then
 
     echo "You run on laptop."
     # Use pip to install
