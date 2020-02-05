@@ -36,29 +36,26 @@ import sys, select, termios, tty
 
 # set param
 SMARTROBOT_MAX_LIN_VEL = 4
-SMARTROBOT_MAX_ANG_VEL = 10
+SMARTROBOT_MAX_ANG_VEL = 1
 
 LIN_VEL_STEP_SIZE = 0.1
-ANG_VEL_STEP_SIZE = 1
+ANG_VEL_STEP_SIZE = 0.1
 
 msg = """
-Smart_robot setup !
 ---------------------------
-                
-
-
-                  y
+Smart_robot setup !
+            
+                  x
                   ^
-                  |               ^
- | motorA         |        motorC |
- v                |
+ ^                |                ^
+ | motor2         |        motor 1 |
                   |
-                  |____________> x
+                  |
+       y <--------|
 
 
-            motorB 
+            motor3 
              -->
-
 
 ------------------------------
 Control Your smartrobot!

@@ -34,7 +34,7 @@
 ## import library
 import sys, time , select, tty ,termios ,serial
 import numpy as np
-from smart_robot_driver_omnibotV11 import Smart_robot
+from smart_robotV12_driver import smart_robotV12
 
 ## import ROS library
 import rospy
@@ -42,11 +42,8 @@ from std_msgs.msg import Float64
 from geometry_msgs.msg import Twist
 
 ## set param 
-timeout = float(10)
 veh_cmd = {"Vx":0, "Vy":0, "Omega":0}
-vel_gain = float(70)
-no_cmd_received = True
-
+vel_gain = rospy.get_param("~vel_gain",70.0)
 
 ## Show information of this process
 
@@ -57,16 +54,16 @@ Control Smart Robot !
                 
 
 
-                  y
+                  x
                   ^
-                  |               ^
- | motorA         |        motorC |
- v                |
+ ^                |                ^
+ | motor2         |        motor 1 |
                   |
-                  |____________> x
+                  |
+       y <--------|
 
 
-            motorB 
+            motor3 
              -->
 
 
@@ -79,27 +76,20 @@ CTRL-C to quit
 
 """
 
+
 print(msg)
                     
 def callback(data):
-    global timeout , veh_cmd , vel_gain , no_cmd_received ,last_cmd_vel_time
+    global veh_cmd , vel_gain
     twist = data 
     veh_cmd["Vx"] = twist.linear.x * vel_gain
     veh_cmd["Vy"] = twist.linear.y * vel_gain
-    veh_cmd["Omega"] = twist.angular.z * vel_gain
-    no_cmd_received = False
-    last_cmd_vel_time = time.time()
+    veh_cmd["Omega"] = twist.angular.z * vel_gain * (-1)
     tx_vel_cmd()
 
 def tx_vel_cmd():
-    global timeout , veh_cmd , vel_gain , no_cmd_received ,last_cmd_vel_time
-    if( (time.time()- last_cmd_vel_time) > timeout and not no_cmd_received ):
-        veh_cmd["Vx"] = 0
-        veh_cmd["Vy"] = 0
-        veh_cmd["Omega"] = 0
-        no_cmd_received = True   
     cmd = [ int(veh_cmd["Vx"]), int(veh_cmd["Vy"]), int(veh_cmd["Omega"]) ]     
-    robot.send_vel_cmd(cmd)
+    robot.vel(cmd)
 
 def getKey():
     tty.setraw(sys.stdin.fileno())
@@ -116,14 +106,14 @@ def getKey():
 if __name__ == '__main__':
 
     ## initialize
-    rospy.init_node('smart_robot_twist_omnibotV11', anonymous=True)
+    rospy.init_node('smart_robot_twist_omnibotV12', anonymous=True)
     
     ## set serial communication
-    port  = "/dev/smart_robot_omnibotV11"     #port = "" for linux
+    port  = "/dev/smart_robot_omnibotV12"     #port = "" for linux
     baud  = 115200
-    robot = Smart_robot(port,baud)
+    robot = smart_robotV12(port,baud)
     robot.connect()
-    warn_state = False
+    robot.set_mode(0)
 
     while(True):       
         if rospy.is_shutdown() == True:
