@@ -106,8 +106,7 @@ class smart_robotV12():
             direction_z = 1
 
         direction = direction_x + direction_y + direction_z
-        print("Direction: {}".format(direction))
-
+        
         # 1-bytes , direction for x(bit2) ,y(bit1) ,z(bit0) ,and 0 : normal , 1 : reverse
         speed += struct.pack('>b',direction)  
             
@@ -115,3 +114,4 @@ class smart_robotV12():
         #print(binascii.hexlify(speed))
         if self.connected == True:       
             self.device.write(speed)
+            print("Direction: {}".format(direction))
