@@ -33,7 +33,7 @@
 
 ## import library
 import numpy as np
-import time , struct ,binascii
+import time , struct ,binascii ,math
 from serial import Serial , SerialException
 
 
@@ -115,3 +115,101 @@ class smart_robotV12():
         if self.connected == True:       
             self.device.write(speed)
             print("Direction: {}".format(direction))
+
+    def load_setting(self):
+        cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
+        cmd.append(0x80) # Tx[2]
+        cmd.append(0x80) # Tx[3]
+        cmd.append(0x00) # Tx[4]
+        cmd.append(0x80) # Tx[5]
+        cmd.append(0x00) # Tx[6]
+        cmd.append(0x00) # Tx[7]
+        cmd.append(0x01) # Tx[8]
+        cmd.append(0x00) # Tx[9]
+        if self.connected == True:       
+            self.device.write(cmd)
+            print("OmniboardV12 load setting!!")
+
+    def load_initial(self):
+        cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
+        cmd.append(0x80) # Tx[2]
+        cmd.append(0x80) # Tx[3]
+        cmd.append(0x00) # Tx[4]
+        cmd.append(0x80) # Tx[5]
+        cmd.append(0x00) # Tx[6]
+        cmd.append(0x00) # Tx[7]
+        cmd.append(0x02) # Tx[8]
+        cmd.append(0x00) # Tx[9]
+        if self.connected == True:       
+            self.device.write(cmd)
+            print("Initialize OmniboradV12.")
+
+    def write_setting(self):
+        cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
+        cmd.append(0x80) # Tx[2]
+        cmd.append(0x80) # Tx[3]
+        cmd.append(0x00) # Tx[4]
+        cmd.append(0x80) # Tx[5]
+        cmd.append(0x00) # Tx[6]
+        cmd.append(0x00) # Tx[7]
+        cmd.append(0x03) # Tx[8]
+        cmd.append(0x00) # Tx[9]
+        if self.connected == True:       
+            self.device.write(cmd)
+            print("Omniboard writing setting and don't do anything , include shutdown the power , it will take 20 seconds ....... ")
+            time.sleep(20)
+            print("You can restart OmniboardV12 now!")
+
+
+    #================================================
+    # vehicle         : 0 -> omnibot   , 1 -> Mecanum
+    # motor           : 0 -> normal    , 1 -> reverse
+    # encode          : 0 -> normal    , 1 -> reverse
+    # imu_calibration : 0 -> not ot do , 1 -> do it
+    # command         : 0 -> control   , 1 -> APP
+    #================================================
+    def set_system_mode(self,vehicle=0,motor=0,encoder=0,imu_calibration=1,command=0):      
+        # calculate
+        value = {}
+        if vehicle == 1:
+            value["vehicle"] = math.pow(2,0)
+        else:
+            value["vehicle"] = 0
+        if motor == 1:
+            value["motor"] = math.pow(2,4)
+        else:
+            value["motor"] = 0
+        if encoder == 1:
+            value["encoder"] = math.pow(2,5)
+        else:
+            value["encoder"] = 0
+        if imu_calibration == 1:
+            value["imu_calibration"] = math.pow(2,6)
+        else:
+            value["imu_calibration"] = 0
+        if command == 1:
+            value["command"] = math.pow(2,7)
+        else:
+            value["command"] = 0
+
+        mode = value["vehicle"] + value["motor"] + value["encoder"] +  value["imu_calibration"] + value["command"]
+        cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
+        cmd.append(0x80) # Tx[2]
+        cmd.append(0x80) # Tx[3]
+        cmd.append(0x09) # Tx[4]
+        cmd.append(0x00) # Tx[5]
+        cmd.append(0x00) # Tx[6]
+        cmd += struct.pack('>h',mode) # Tx[8] ,Tx[8]
+        print("Omniboard write setting!")
+        cmd.append(0x00) # Tx[9]
+        if self.connected == True:       
+            self.device.write(cmd)
+            print("Send to omniboardV12 : {}".format(binascii.hexlify(cmd)))
+
+
+
+     
+
+
+
+
