@@ -55,7 +55,7 @@ class smart_robotV12():
     def connect(self):
         print("Try to connect the Smart Robot")
         try:
-            self.device = Serial(self.param["device_port"] , self.param["baudrate"])
+            self.device = Serial(self.param["device_port"] , self.param["baudrate"] , timeout=1)
             self.connected = True
             print("Connect done!!")
         except:
@@ -116,6 +116,53 @@ class smart_robotV12():
             self.device.write(speed)
             print("Direction: {}".format(direction))
 
+    # send TT motor vel_cmd
+    def TT_motor(self, veh_cmd):
+      
+        clamp = lambda n, minn, maxn: max(min(maxn, n), minn)
+        speed = bytearray(b'\xFF\xFE')
+        speed.append(0x01)
+        speed += struct.pack('>h',0) # 2-bytes , reserved bit 
+        speed += struct.pack('>h',clamp( abs(veh_cmd[0]), 0, 65536 ))  # 2-bytes , velocity for y axis 
+        speed += struct.pack('>h',clamp( abs(veh_cmd[1]), 0, 65536 ))  # 2-bytes , velocity for z axis 
+
+        if veh_cmd[1] > 0:
+            direction_z = 0
+        else: 
+            direction_z = 1
+        if veh_cmd[0] > 0 :
+            direction_y = 0
+        else:
+            direction_y = 2
+       
+        direction = direction_y + direction_z
+        
+        # 1-bytes , direction for x(bit2) ,y(bit1) ,z(bit0) ,and 0 : normal , 1 : reverse
+        speed += struct.pack('>b',direction)  
+        # debug
+        print(binascii.hexlify(speed))
+        if self.connected == True:       
+            self.device.write(speed)
+            print("Direction: {}".format(direction))
+
+
+    def load_speed_limit(self):
+        cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
+        cmd.append(0x80) # Tx[2]
+        cmd.append(0x80) # Tx[3]
+        cmd.append(0x11) # Tx[4]
+        cmd.append(0x00) # Tx[5]
+        cmd.append(0x00) # Tx[6]
+        cmd.append(0x00) # Tx[7]
+        cmd.append(0x00) # Tx[8]
+        cmd.append(0x00) # Tx[9]
+        if self.connected == True:       
+            self.device.write(cmd)
+            time.sleep(0.01)
+            respond = self.device.readlines()
+            print("Speed limit : {} ".format(respond))
+
+
     def load_setting(self):
         cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
         cmd.append(0x80) # Tx[2]
@@ -162,7 +209,7 @@ class smart_robotV12():
 
 
     #================================================
-    # vehicle         : 0 -> omnibot   , 1 -> Mecanum
+    # vehicle         : 0 -> omnibot   , 1 -> Mecanum , 2 --> no encoder and no imu , 3 --> no encoder and has imu
     # motor           : 0 -> normal    , 1 -> reverse
     # encode          : 0 -> normal    , 1 -> reverse
     # imu_calibration : 0 -> not ot do , 1 -> do it
@@ -199,7 +246,7 @@ class smart_robotV12():
         cmd.append(0x09) # Tx[4]
         cmd.append(0x00) # Tx[5]
         cmd.append(0x00) # Tx[6]
-        cmd += struct.pack('>h',mode) # Tx[8] ,Tx[8]
+        cmd += struct.pack('>h',mode) # Tx[7] ,Tx[8]
         print("Omniboard write setting!")
         cmd.append(0x00) # Tx[9]
         if self.connected == True:       
