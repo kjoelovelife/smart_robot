@@ -36,11 +36,11 @@ import sys, select, termios, tty
 from smart_robotV12_driver import smart_robotV12
 
 # set param
-SMARTROBOT_MAX_LIN_VEL = 65535
-SMARTROBOT_MAX_ANG_VEL = 65535
+SMARTROBOT_MAX_LIN_VEL = 255
+SMARTROBOT_MAX_ANG_VEL = 255
 
-LIN_VEL_STEP_SIZE = 100
-ANG_VEL_STEP_SIZE = 100
+LIN_VEL_STEP_SIZE = 1
+ANG_VEL_STEP_SIZE = 1
 msg = """
 ---------------------------
 Smart_robot setup !
@@ -131,8 +131,8 @@ if __name__=="__main__":
     robot = smart_robotV12(port,baud)
     robot.connect()
     robot.set_mode(2)
-    robot.load_speed_limit()
-    time.sleep(10)
+    #robot.load_speed_limit()
+    #time.sleep(10)
 
     status = 0
     target_linear_vel   = 0.0
@@ -205,6 +205,7 @@ if __name__=="__main__":
                 warn_status = False 
                 
             veh_cmd = (twist.linear.x , twist.angular.z )
+            print(" Y: {} , Z : {}".format(veh_cmd[0] , veh_cmd[1]) )
             #pub.publish(twist)
             robot.TT_motor(veh_cmd)
 

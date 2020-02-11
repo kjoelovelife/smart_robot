@@ -78,9 +78,12 @@ class smart_robotV12():
         start_cmd += struct.pack('>h',vehicle) 
         start_cmd.append(0x00)            # 1-bytes , reserved bit    
 	#debug
-	#print(binascii.hexlify(serial_cmd)) 
+	print("You set : {} ".format(binascii.hexlify(start_cmd))) 
+        #print("Please Wait for 5 seconds...")
+        #time.sleep(5)
         if self.connected == True:
             self.device.write(start_cmd)
+            time.sleep(0.5)
 
     # send vel_cmd
     def vel(self, veh_cmd):
@@ -126,11 +129,11 @@ class smart_robotV12():
         speed += struct.pack('>h',clamp( abs(veh_cmd[0]), 0, 65536 ))  # 2-bytes , velocity for y axis 
         speed += struct.pack('>h',clamp( abs(veh_cmd[1]), 0, 65536 ))  # 2-bytes , velocity for z axis 
 
-        if veh_cmd[1] > 0:
+        if veh_cmd[1] >= 0:
             direction_z = 0
         else: 
             direction_z = 1
-        if veh_cmd[0] > 0 :
+        if veh_cmd[0] >= 0 :
             direction_y = 0
         else:
             direction_y = 2
@@ -218,10 +221,7 @@ class smart_robotV12():
     def set_system_mode(self,vehicle=0,motor=0,encoder=0,imu_calibration=1,command=0):      
         # calculate
         value = {}
-        if vehicle == 1:
-            value["vehicle"] = math.pow(2,0)
-        else:
-            value["vehicle"] = 0
+        value["vehicle"] = vehicle      
         if motor == 1:
             value["motor"] = math.pow(2,4)
         else:
