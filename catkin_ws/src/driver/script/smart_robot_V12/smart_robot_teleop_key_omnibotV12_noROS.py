@@ -130,9 +130,10 @@ if __name__=="__main__":
     baud  = 115200
     robot = smart_robotV12(port,baud)
     robot.connect()
-    robot.set_mode(2)
-    #robot.load_speed_limit()
-    #time.sleep(10)
+    robot.set_mode(0)
+    robot.read_system_mode()
+    robot.read_speed_limit()
+    time.sleep(2)
 
     status = 0
     target_linear_vel   = 0.0
@@ -204,10 +205,10 @@ if __name__=="__main__":
                 
                 warn_status = False 
                 
-            veh_cmd = (twist.linear.x , twist.angular.z )
-            print(" Y: {} , Z : {}".format(veh_cmd[0] , veh_cmd[1]) )
+            veh_cmd = (0 , int(twist.linear.x) , int(twist.angular.z))
+            print(" Y: {} , Z : {}".format(veh_cmd[1] , veh_cmd[2]) )
             #pub.publish(twist)
-            robot.TT_motor(veh_cmd)
+            robot.vel(veh_cmd)
 
     except:
         print e

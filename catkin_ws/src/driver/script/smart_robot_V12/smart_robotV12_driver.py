@@ -51,6 +51,7 @@ class smart_robotV12():
         self.cmd_seq = 0
         self.connected = False
         self.start = False
+        self.clamp = lambda n, minn, maxn: max(min(maxn, n), minn)
 
     def connect(self):
         print("Try to connect the Smart Robot")
@@ -67,7 +68,7 @@ class smart_robotV12():
             self.device.close() 
             self.connected = False  
 
-    ## Start smartbot and choose "omnibot" or "Mecanum"
+    ## Start smartbot and choose " 0 :omnibot" , 1: normal motor without encoder , 2: normal motor with encoder , 3 :Mecanum"
     def set_mode(self, vehicle):
         start_cmd = bytearray(b'\xFF\xFE')
         start_cmd.append(0x80)
@@ -78,7 +79,7 @@ class smart_robotV12():
         start_cmd += struct.pack('>h',vehicle) 
         start_cmd.append(0x00)            # 1-bytes , reserved bit    
 	#debug
-	print("You set : {} ".format(binascii.hexlify(start_cmd))) 
+	print("You set : {} ".format(binascii.hexlify(start_cmd)))
         #print("Please Wait for 5 seconds...")
         #time.sleep(5)
         if self.connected == True:
@@ -88,18 +89,17 @@ class smart_robotV12():
     # send vel_cmd
     def vel(self, veh_cmd):
       
-        clamp = lambda n, minn, maxn: max(min(maxn, n), minn)
         speed = bytearray(b'\xFF\xFE')
         speed.append(0x01)
-        speed += struct.pack('>h',clamp( abs(veh_cmd[1]), 0, 65536 ) ) # 2-bytes , velocity for x axis 
-        speed += struct.pack('>h',clamp( abs(veh_cmd[0]), 0, 65536 ))  # 2-bytes , velocity for y axis 
-        speed += struct.pack('>h',clamp( abs(veh_cmd[2]), 0, 65536 ))  # 2-bytes , velocity for z axis 
+        speed += struct.pack('>h',self.clamp( abs(veh_cmd[0]), 0, 65536 ) ) # 2-bytes , velocity for x axis 
+        speed += struct.pack('>h',self.clamp( abs(veh_cmd[1]), 0, 65536 ))  # 2-bytes , velocity for y axis 
+        speed += struct.pack('>h',self.clamp( abs(veh_cmd[2]), 0, 65536 ))  # 2-bytes , velocity for z axis 
 
-        if veh_cmd[1] > 0:
-            direction_x = 4
-        else:
-            direction_x = 0
         if veh_cmd[0] > 0:
+            direction_x = 0
+        else:
+            direction_x = 4
+        if veh_cmd[1] > 0:
             direction_y = 0
         else:
             direction_y = 2
@@ -114,7 +114,7 @@ class smart_robotV12():
         speed += struct.pack('>b',direction)  
             
         # debug
-        #print(binascii.hexlify(speed))
+        print(binascii.hexlify(speed))
         if self.connected == True:       
             self.device.write(speed)
             print("Direction: {}".format(direction))
@@ -122,12 +122,12 @@ class smart_robotV12():
     # send TT motor vel_cmd
     def TT_motor(self, veh_cmd):
       
-        clamp = lambda n, minn, maxn: max(min(maxn, n), minn)
+        
         speed = bytearray(b'\xFF\xFE')
         speed.append(0x01)
         speed += struct.pack('>h',0) # 2-bytes , reserved bit 
-        speed += struct.pack('>h',clamp( abs(veh_cmd[0]), 0, 65536 ))  # 2-bytes , velocity for y axis 
-        speed += struct.pack('>h',clamp( abs(veh_cmd[1]), 0, 65536 ))  # 2-bytes , velocity for z axis 
+        speed += struct.pack('>h',self.clamp( abs(veh_cmd[0]), 0, 65536 ))  # 2-bytes , velocity for y axis 
+        speed += struct.pack('>h',self.clamp( abs(veh_cmd[1]), 0, 65536 ))  # 2-bytes , velocity for z axis 
 
         if veh_cmd[1] >= 0:
             direction_z = 0
@@ -148,8 +148,21 @@ class smart_robotV12():
             self.device.write(speed)
             print("Direction: {}".format(direction))
 
+    def set_speed_limit(self , speed_limit):
+        cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
+        cmd.append(0x80) # Tx[2]
+        cmd.append(0x80) # Tx[3]
+        cmd.append(0x01) # Tx[4]
+        cmd.append(0x00) # Tx[5]
+        cmd.append(0x00) # Tx[6]
+        cmd += struct.pack('>h',self.clamp( abs(speed_limit), 0, 65536 )) # Tx[7] , Tx[8] 
+        cmd.append(0x00) # Tx[9]
+        if self.connected == True:       
+            self.device.write(cmd)
+            time.sleep(0.01)
+            self.read_speed_limit()
 
-    def load_speed_limit(self):
+    def read_speed_limit(self):
         cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
         cmd.append(0x80) # Tx[2]
         cmd.append(0x80) # Tx[3]
@@ -240,6 +253,7 @@ class smart_robotV12():
             value["command"] = 0
 
         mode = value["vehicle"] + value["motor"] + value["encoder"] +  value["imu_calibration"] + value["command"]
+        print("Mode : {}".format(mode))
         cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
         cmd.append(0x80) # Tx[2]
         cmd.append(0x80) # Tx[3]
@@ -251,7 +265,23 @@ class smart_robotV12():
         cmd.append(0x00) # Tx[9]
         if self.connected == True:       
             self.device.write(cmd)
-            print("Send to omniboardV12 : {}".format(binascii.hexlify(cmd)))
+            print("Send to omniboardV12 : {} ".format(binascii.hexlify(cmd)))
+
+    def read_system_mode(self):
+        cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
+        cmd.append(0x80) # Tx[2]
+        cmd.append(0x80) # Tx[3]
+        cmd.append(0x19) # Tx[4]
+        cmd.append(0x00) # Tx[5]
+        cmd.append(0x00) # Tx[6]
+        cmd.append(0x00) # Tx[7]
+        cmd.append(0x00) # Tx[8]
+        cmd.append(0x00) # Tx[9]
+        if self.connected == True:       
+            self.device.write(cmd)
+            time.sleep(0.01)
+            respond = self.device.readlines()
+            print("System mode : {}" .format(respond))
 
 
 

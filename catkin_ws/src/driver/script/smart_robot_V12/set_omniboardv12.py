@@ -40,12 +40,20 @@ from smart_robotV12_driver import smart_robotV12
 if __name__ == '__main__':
 
 
+    ## set serial communication
+    port  = "/dev/smart_robot_omnibotV12"     #port = "" for linux
+    baud  = 115200
+    robot = smart_robotV12(port,baud)
+    robot.connect()
+    robot.read_system_mode()
+    
+
     ## set parameter
     mode = {'vehicle':0 , 'motor':0 , 'encoder':0 , 'imu':0 , 'command':0 }  
 
     ## set vehicle
     print("")
-    print("Set kind of vehicle. 0 for Omnibot , 1 for Mecanum .") 
+    print("Set kind of vehicle. 0 :omnibot , 1: normal motor without encoder , 2: normal motor with encoder , 3 :Mecanum .") 
     mode["vehicle"] = int(input("Kind of vehicle : "))
 
     ## set motor
@@ -60,22 +68,22 @@ if __name__ == '__main__':
 
     ## set imu_calibration
     print("")
-    print("Do you wnat to start imu calibrate when start Omniboard?  0 for don't calibrate , 1 for calibrate .") 
+    print("Do you wnat to start imu calibrate when start Omniboard?  0 for don't calibrate , 1 for calibrate .")
     mode["imu"] = int(input("mode of imu calibration : "))
 
     ## set mode of command
     print("")
-    print("set mode of command.   0 for control mode , 1 for APP mode .") 
+    print("set mode of command.   0 for control mode , 1 for APP mode .")
     mode["command"] = int(input("mode of command : "))
 
+    ## set speed limit
     print("")
-    print(mode)
+    print("set speed limit : 60 ~ 65536 .")
+    speed_limit = int(input("speed limit : "))
   
-    ## set serial communication
-    port  = "/dev/smart_robot_omnibotV12"     #port = "" for linux
-    baud  = 115200
-    robot = smart_robotV12(port,baud)
-    robot.connect()
+    ## send serial
     robot.set_system_mode(vehicle=mode["vehicle"],motor=mode["motor"],encoder=mode["encoder"],imu_calibration=mode["imu"],command=mode["command"]) #    robot.set_system_mode(vehicle,motor,encoder,imu_calibration,command)
+    robot.set_speed_limit(speed_limit)
     robot.write_setting()
+    robot.disconnect()
 
