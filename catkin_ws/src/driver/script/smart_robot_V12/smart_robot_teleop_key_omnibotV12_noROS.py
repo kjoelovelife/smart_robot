@@ -131,6 +131,7 @@ if __name__=="__main__":
     robot = smart_robotV12(port,baud)
     robot.connect()
     robot.set_mode(0)
+    robot.set_mode(0)
     robot.read_system_mode()
     robot.read_speed_limit()
     time.sleep(2)
