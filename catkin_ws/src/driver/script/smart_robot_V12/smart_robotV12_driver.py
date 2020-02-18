@@ -104,9 +104,9 @@ class smart_robotV12():
         else:
             direction_y = 2
         if veh_cmd[2] > 0:
-            direction_z = 0
-        else:
             direction_z = 1
+        else:
+            direction_z = 0
 
         direction = direction_x + direction_y + direction_z
         
