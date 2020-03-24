@@ -56,7 +56,7 @@ class smart_robotV12():
     def connect(self):
         print("Try to connect the Smart Robot")
         try:
-            self.device = Serial(self.param["device_port"] , self.param["baudrate"] , timeout=1)
+            self.device = Serial(self.param["device_port"] , self.param["baudrate"] )
             self.connected = True
             print("Connect done!!")
         except:
@@ -126,14 +126,14 @@ class smart_robotV12():
         speed = bytearray(b'\xFF\xFE')
         speed.append(0x01)
         speed += struct.pack('>h',0) # 2-bytes , reserved bit 
-        speed += struct.pack('>h',self.clamp( abs(veh_cmd[0]), 0, 65536 ))  # 2-bytes , velocity for y axis 
-        speed += struct.pack('>h',self.clamp( abs(veh_cmd[1]), 0, 65536 ))  # 2-bytes , velocity for z axis 
+        speed += struct.pack('>h',self.clamp( abs(veh_cmd[1]), 0, 65536 ))  # 2-bytes , velocity for y axis 
+        speed += struct.pack('>h',self.clamp( abs(veh_cmd[2]), 0, 65536 ))  # 2-bytes , velocity for z axis 
 
-        if veh_cmd[1] >= 0:
+        if veh_cmd[2] >= 0:
             direction_z = 0
         else: 
             direction_z = 1
-        if veh_cmd[0] >= 0 :
+        if veh_cmd[1] >= 0 :
             direction_y = 0
         else:
             direction_y = 2
@@ -174,9 +174,11 @@ class smart_robotV12():
         cmd.append(0x00) # Tx[9]
         if self.connected == True:       
             self.device.write(cmd)
-            time.sleep(0.01)
-            respond = self.device.readlines()
-            print("Speed limit : {} ".format(respond))
+            respond = []
+            for index in range(1,7,1):
+                respond.append(binascii.hexlify(self.device.read(1)))
+            #respond = self.device.readlines()
+            print("System mode : {}" .format(respond))
 
 
     def load_setting(self):
@@ -279,8 +281,10 @@ class smart_robotV12():
         cmd.append(0x00) # Tx[9]
         if self.connected == True:       
             self.device.write(cmd)
-            time.sleep(0.01)
-            respond = self.device.readlines()
+            respond = []
+            for index in range(1,7,1):
+                respond.append(binascii.hexlify(self.device.read(1)))
+            #respond = self.device.readlines()
             print("System mode : {}" .format(respond))
 
 
