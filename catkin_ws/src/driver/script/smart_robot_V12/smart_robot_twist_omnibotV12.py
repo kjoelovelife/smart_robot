@@ -115,6 +115,8 @@ if __name__ == '__main__':
     robot = smart_robotV12(port,baud)
     robot.connect()
     robot.set_mode(0)
+    time.sleep(0.5)
+    robot.set_mode(0)
     while(True):       
         if rospy.is_shutdown() == True:
             robot.disconnect()

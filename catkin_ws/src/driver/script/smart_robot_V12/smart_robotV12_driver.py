@@ -87,26 +87,27 @@ class smart_robotV12():
             self.device.write(start_cmd)
             time.sleep(0.5)
 
-    # send vel_cmd
-    def vel(self, veh_cmd):
+    # send vel_cmd[Vx,Vy,Vz]
+    def vel(self, veh_cmd): 
       
         speed = bytearray(b'\xFF\xFE')
         speed.append(0x01)
-        speed += struct.pack('>h',self.clamp( abs(veh_cmd[0]), 0, 65536 ) ) # 2-bytes , velocity for x axis 
-        speed += struct.pack('>h',self.clamp( abs(veh_cmd[1]), 0, 65536 ))  # 2-bytes , velocity for y axis 
+        speed += struct.pack('>h',self.clamp( abs(veh_cmd[1]), 0, 65536 ) ) # 2-bytes , velocity for x axis 
+        speed += struct.pack('>h',self.clamp( abs(veh_cmd[0]), 0, 65536 ))  # 2-bytes , velocity for y axis 
         speed += struct.pack('>h',self.clamp( abs(veh_cmd[2]), 0, 65536 ))  # 2-bytes , velocity for z axis 
 
-        if veh_cmd[0] > 0:
-            direction_x = 0
-        else:
-            direction_x = 4
-        if veh_cmd[1] > 0:
+        # set direction
+        direction_x = 0
+        direction_y = 0
+        direction_z = 0         
+ 
+        if veh_cmd[0] >= 0 :
             direction_y = 0
-        else:
-            direction_y = 2
-        if veh_cmd[2] > 0:
-            direction_z = 1
-        else:
+        else :
+            direction_y = math.pow(2,1)
+        if veh_cmd[2] >= 0 :
+            direction_z = math.pow(2,0)
+        else :
             direction_z = 0
 
         direction = direction_x + direction_y + direction_z

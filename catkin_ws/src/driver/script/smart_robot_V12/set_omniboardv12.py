@@ -82,7 +82,9 @@ if __name__ == '__main__':
     speed_limit = int(input("speed limit : "))
   
     ## send serial
-    robot.set_system_mode(vehicle=mode["vehicle"],motor=mode["motor"],encoder=mode["encoder"],imu_calibration=mode["imu"],command=mode["command"]) #    robot.set_system_mode(vehicle,motor,encoder,imu_calibration,command)
+
+    for number in range(3):
+        robot.set_system_mode(vehicle=mode["vehicle"],motor=mode["motor"],encoder=mode["encoder"],imu_calibration=mode["imu"],command=mode["command"]) #    robot.set_system_mode(vehicle,motor,encoder,imu_calibration,command)
     robot.set_speed_limit(speed_limit)
     robot.write_setting()
     robot.disconnect()
