@@ -35,11 +35,11 @@ from geometry_msgs.msg import Twist
 import sys, select, termios, tty
 
 # set param
-SMARTROBOT_MAX_LIN_VEL = 30
-SMARTROBOT_MAX_ANG_VEL = 30
+SMARTROBOT_MAX_LIN_VEL = 100
+SMARTROBOT_MAX_ANG_VEL = 100
 
-LIN_VEL_STEP_SIZE = 0.5
-ANG_VEL_STEP_SIZE = 0.5
+LIN_VEL_STEP_SIZE = 2
+ANG_VEL_STEP_SIZE = 2
 
 msg = """
 ---------------------------
