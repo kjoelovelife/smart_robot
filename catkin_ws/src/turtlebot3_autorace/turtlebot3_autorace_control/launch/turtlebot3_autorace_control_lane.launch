@@ -10,10 +10,8 @@
    <include file="$(find turtlebot3_autorace_detect)/launch/turtlebot3_autorace_detect_lane.launch">
    </include>
 
-
-
   <!-- lane control -->
-  <node pkg="turtlebot3_autorace_control" type="control_lane" name="control_lane" output="screen">
+  <node pkg="turtlebot3_autorace_control" type="control_lane_omnibot" name="control_lane" output="screen">
     <remap from="/control/lane" to="/detect/lane" />
     <remap from="/control/cmd_vel" to="/cmd_vel" />
   </node>

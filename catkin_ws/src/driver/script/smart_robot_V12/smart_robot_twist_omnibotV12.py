@@ -43,7 +43,7 @@ from geometry_msgs.msg import Twist
 
 ## set param 
 veh_cmd = {"Vx":0, "Vy":0, "Omega":0}
-vel_gain = rospy.get_param("~vel_gain",70.0)
+vel_gain = rospy.get_param("~vel_gain",0.25)
 
 ## Show information of this process
 
