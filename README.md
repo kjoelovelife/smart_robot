@@ -1,7 +1,7 @@
 # Smart_robot
 
 <p align="center">
-  <img src="https://github.com/kjoelovelife/smart_robot/blob/master/smart_robot.jpg" width="280"/>
+  <img src="https://github.com/kjoelovelife/smart_robot/blob/master/smart_robotv12.jpg" width="280"/>
 </p>
 
 ## Introduction
