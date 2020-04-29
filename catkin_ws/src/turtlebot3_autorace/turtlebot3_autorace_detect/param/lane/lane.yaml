@@ -4,13 +4,13 @@ detect:
       hue_l: 0
       hue_h: 179
       saturation_l: 0
-      saturation_h: 33
-      lightness_l: 197
+      saturation_h: 255
+      lightness_l: 170
       lightness_h: 255
     yellow:
       hue_l: 18
       hue_h: 44
       saturation_l: 41
-      saturation_h: 191
+      saturation_h: 255
       lightness_l: 122
       lightness_h: 255
