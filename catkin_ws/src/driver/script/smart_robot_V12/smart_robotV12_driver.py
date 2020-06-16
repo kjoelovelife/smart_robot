@@ -342,35 +342,35 @@ class smart_robotV12():
 
 
     #================================================
-    # vehicle         : 0 -> omnibot   , 1 -> Mecanum , 2 --> no encoder and no imu , 3 --> no encoder and has imu
-    # motor           : 0 -> normal    , 1 -> reverse
-    # encode          : 0 -> normal    , 1 -> reverse
-    # imu_calibration : 0 -> not ot do , 1 -> do it
-    # command         : 0 -> control   , 1 -> APP
+    # vehicle       (Bit0)  : 0 -> omnibot   ; 1 -> Mecanum ; 2 --> encoder , angle param and no imu(1C) ; 3 --> encoder , no angle parameter and no imu(1D) ; 
+    #                         4 -->  no encoder , angle param , and no imu(1D) ; 5 --> no encoder , no angle parameter , and no imu(1D)
+    # imu           (Bit3)  : 0 -> not to do , 1 -> do it
+    # imu_axis      (Bit4)  : 0 -> not to do , 1 -> do it
+    # return_encoder(Bit6)  : 0 -> not to do , 1 -> do it
+    # command       (Bit7)  : 0 -> control   , 1 -> APP
+    # motor_direct  (Bit8)  : 0 -> normal    , 1 -> reverse
+    # encoder_direct(Bit9)  : 0 -> normal    , 1 -> reverse
+    # turn_direct   (Bit10) : 0 -> normal    , 1 -> reverse
+    # imu_reverse   (Bit11) : 0 -> normal    , 1 -> reverse    
     #================================================
-    def set_system_mode(self,vehicle=0,motor=0,encoder=0,imu_calibration=1,command=0):      
+    def set_system_mode(self,vehicle=0,imu=0,imu_axis=0,return_encoder=0,command=0,motor_direct=0,encoder_direct=0,turn_direct=0,imu_reverse=0):      
         # calculate
-        value = {}
-        value["vehicle"] = vehicle      
-        if motor == 1:
-            value["motor"] = math.pow(2,4)
-        else:
-            value["motor"] = 0
-        if encoder == 1:
-            value["encoder"] = math.pow(2,5)
-        else:
-            value["encoder"] = 0
-        if imu_calibration == 1:
-            value["imu_calibration"] = math.pow(2,6)
-        else:
-            value["imu_calibration"] = 0
-        if command == 1:
-            value["command"] = math.pow(2,7)
-        else:
-            value["command"] = 0
-
-        mode = value["vehicle"] + value["motor"] + value["encoder"] +  value["imu_calibration"] + value["command"]
-        print("Mode : {}".format(mode))
+        key_word = ["vehicle","imu","imu_axis","return_encoder","command","motor_direct","encoder_direct","turn_direct","imu_reverse"]
+        parameter= [vehicle,imu,imu_axis,return_encoder,command,motor_direct,encoder_direct,turn_direct,imu_reverse]
+        calculate= {}  
+        calculate["vehicle"]            = lambda setting : setting
+        calculate["imu"]                = lambda setting : 0 if setting == 0 else math.pow(2,3)  
+        calculate["imu_axis"]           = lambda setting : 0 if setting == 0 else math.pow(2,4)
+        calculate["return_encoder"]     = lambda setting : 0 if setting == 0 else math.pow(2,6)
+        calculate["command"]            = lambda setting : 0 if setting == 0 else math.pow(2,7)
+        calculate["motor_direct"]       = lambda setting : 0 if setting == 0 else math.pow(2,8)
+        calculate["encoder_direct"]     = lambda setting : 0 if setting == 0 else math.pow(2,9)
+        calculate["turn_direct"]        = lambda setting : 0 if setting == 0 else math.pow(2,10)
+        calculate["imu_reverse"]        = lambda setting : 0 if setting == 0 else math.pow(2,11)
+        mode = 0
+        for index in range(len(key_word)):
+             mode += calculate[ key_word[index] ](parameter[index])
+        print(mode)
         cmd = bytearray(b'\xFF\xFE') # Tx[0] , Tx[1]
         cmd.append(0x80) # Tx[2]
         cmd.append(0x80) # Tx[3]

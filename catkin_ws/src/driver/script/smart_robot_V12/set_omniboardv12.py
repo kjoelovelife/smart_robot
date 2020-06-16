@@ -36,6 +36,72 @@ import sys, time , select, tty ,termios ,serial
 import numpy as np
 from smart_robotV12_driver import smart_robotV12
 
+msg_vehicle = '''
+---------------------------------------------------------
+Please set your vehicle. \n
+0 --> omnibot.\n
+1 --> Mecanum.\n
+2 --> encoder , angle param and no imu(1C).\n
+3 --> encoder , no angle parameter and no imu(1D).\n 
+4 --> no encoder , angle param , and no imu(1D).\n
+5 --> no encoder , no angle parameter , and no imu(1D).
+'''
+
+msg_imu = '''
+---------------------------------------------------------
+Please set your imu while start. \n
+0 --> imu don't calibrate.\n
+1 --> imu calibrate.
+'''
+
+msg_imuAxis = '''
+---------------------------------------------------------
+Please set your imu while axis x and axis y are zero. \n
+0 --> imu don't calibrate.\n
+1 --> imu calibrate.
+'''
+
+msg_returnEncoder = '''
+---------------------------------------------------------
+Please set your encoder will return value or not. \n
+0 --> encoder will not return value.\n
+1 --> encoder will return value.
+'''
+
+msg_command = '''
+---------------------------------------------------------
+Please set your command mode. \n
+0 --> control mode.\n
+1 --> App mode.
+'''
+
+msg_motorDirect = '''
+---------------------------------------------------------
+Please set your motor direction while moving. \n
+0 --> normal moving.\n
+1 --> reverse moving.
+'''
+
+msg_encoderDirect = '''
+---------------------------------------------------------
+Please set your encoder direction while moving. \n
+0 --> normal moving.\n
+1 --> reverse moving.
+'''
+
+msg_turnDirect = '''
+---------------------------------------------------------
+Please set your turn direction while moving. \n
+0 --> normal moving.\n
+1 --> reverse moving.
+'''
+
+msg_imuReverse = '''
+---------------------------------------------------------
+Please set your imu will be reverse or not. \n
+0 --> normal.\n
+1 --> reverse.
+'''
 ##  start the process  ##
 if __name__ == '__main__':
 
@@ -49,43 +115,53 @@ if __name__ == '__main__':
     
 
     ## set parameter
-    mode = {'vehicle':0 , 'motor':0 , 'encoder':0 , 'imu':0 , 'command':0 }  
+    mode = {'vehicle':0,'imu':0,'imu_axis':0,'return_encoder':0,'command':0,'motor_direct':0,'encoder_direct':0,'turn_direct':0,'imu_reverse':0 }  
 
     ## set vehicle
-    print("")
-    print("Set kind of vehicle. 0 :omnibot , 1: normal motor without encoder , 2: normal motor with encoder , 3 :Mecanum .") 
+    print(msg_vehicle) 
     mode["vehicle"] = int(input("Kind of vehicle : "))
 
-    ## set motor
-    print("")
-    print("Set mode of vehicle. 0 for normal , 1 for reverse .") 
-    mode["motor"] = int(input("mode of motor : "))
+    ## set imu
+    print(msg_imu) 
+    mode["imu_axis"] = int(input("mode of imu : "))
 
-    ## set encoder
-    print("")
-    print("Set mode of encoder. 0 for normal , 1 for reverse .") 
-    mode["encoder"] = int(input("mode of encoder : "))
+    ## set imu axis
+    print(msg_imuAxis) 
+    mode["imu axis"] = int(input("mode of imu axis : "))
 
-    ## set imu_calibration
-    print("")
-    print("Do you wnat to start imu calibrate when start Omniboard?  0 for don't calibrate , 1 for calibrate .")
-    mode["imu"] = int(input("mode of imu calibration : "))
+    ## set return_encoder
+    print(msg_returnEncoder)
+    mode["return_encoder"] = int(input("mode of return_encoder : "))
 
     ## set mode of command
-    print("")
-    print("set mode of command.   0 for control mode , 1 for APP mode .")
+    print(msg_command)
     mode["command"] = int(input("mode of command : "))
 
-    ## set speed limit
-    print("")
-    print("set speed limit : 60 ~ 65536 .")
-    speed_limit = int(input("speed limit : "))
-  
+    ## set motor_direct
+    print(msg_motorDirect)
+    mode["motor_direct"] = int(input("mode of motor_direct : "))
+
+    ## set encoder_direct
+    print(msg_encoderDirect)
+    mode["encoder_direct"] = int(input("mode of encoder_direct : "))
+
+    ## set turn_direct
+    print(msg_turnDirect)
+    mode["turn_direct"] = int(input("mode of turn_direct : ")) 
+
+    ## set imu_reverse
+    print(msg_imuReverse)
+    mode["imu_reverse"] = int(input("mode of imu_reverse : "))   
+
     ## send serial
 
     for number in range(3):
-        robot.set_system_mode(vehicle=mode["vehicle"],motor=mode["motor"],encoder=mode["encoder"],imu_calibration=mode["imu"],command=mode["command"]) #    robot.set_system_mode(vehicle,motor,encoder,imu_calibration,command)
-    robot.set_speed_limit(speed_limit)
+        robot.set_system_mode(vehicle=mode["vehicle"],imu=mode["imu"],
+                              imu_axis=mode["imu_axis"],return_encoder=mode["return_encoder"],
+                              command=mode["command"],motor_direct=mode["motor_direct"],
+                              encoder_direct=mode["encoder_direct"],turn_direct=mode["turn_direct"],
+                              imu_reverse=mode["imu_reverse"])
+
     robot.write_setting()
     robot.disconnect()
 
