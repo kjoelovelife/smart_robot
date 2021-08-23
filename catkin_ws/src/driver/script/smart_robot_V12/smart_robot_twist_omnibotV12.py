@@ -57,13 +57,13 @@ Control Smart Robot !
                   x
                   ^
  ^                |                ^
- | motor2         |        motor 1 |
+ | motor2         |        motor 3 |
                   |
                   |
        y <--------|
 
 
-            motor3 
+            motor1 
              -->
 
 
@@ -123,7 +123,7 @@ if __name__ == '__main__':
             print''
             break
         else:
-            rospy.Subscriber('/cmd_vel', Twist, callback)
+            rospy.Subscriber('~cmd_vel', Twist, callback)
             rospy.spin()
     
     

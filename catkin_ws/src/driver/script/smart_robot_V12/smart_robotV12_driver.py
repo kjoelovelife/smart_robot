@@ -105,7 +105,7 @@ class smart_robotV12():
             direction_y = 0
         else :
             direction_y = math.pow(2,1)
-        if veh_cmd[2] >= 0 :
+        if veh_cmd[2] <= 0 :
             direction_z = math.pow(2,0)
         else :
             direction_z = 0

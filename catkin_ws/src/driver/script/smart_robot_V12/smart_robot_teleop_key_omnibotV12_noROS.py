@@ -48,13 +48,13 @@ Smart_robot setup !
                   x
                   ^
  ^                |                ^
- | motor2         |        motor 1 |
+ | motor2         |        motor 3 |
                   |
                   |
        y <--------|
 
 
-            motor3 
+            motor1 
              -->
 
 ------------------------------

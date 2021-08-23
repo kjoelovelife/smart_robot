@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="pkg_name" default="driver"/>
+    <arg name="teleop_key" default="keyboard_to_twist"/>
+    <arg name="twist_ominibot" default="twist_to_ominibotV12"/>
+    
+    <!-- Keyboard to twist msgs -->
+    <node pkg="driver" type="smart_robot_teleop_key_omnibotV12.py" name="$(arg teleop_key)" output="screen"/>
+    
+
+    <!-- Twist msgs to ominiBotHV1.2  -->
+    <remap from="~cmd_vel" to="/$(arg teleop_key)/cmd_vel"/>
+    <node pkg="driver" type="smart_robot_twist_omnibotV12.py" name="$(arg twist_ominibot)"/>
+
+</launch>

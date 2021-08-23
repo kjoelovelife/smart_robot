@@ -9,4 +9,4 @@ KERNEL =="ttyAMA0" , MODE="0666"
 
 # smart_robot
 #ATTRS{idVendor}=="0403" ATTRS{idProduct}=="6015", ENV{ID_MM_DEVICE_IGNORE}="1",MODE:="0666",SYMLINK+="smart_robot_omnibotV11"
-ATTRS{idVendor}=="0403" ATTRS{idProduct}=="6015", ENV{ID_MM_DEVICE_IGNORE}="1",MODE:="0666",SYMLINK+="smart_robot_omnibotV12"
+KERNEL=="ttyUSB*", ATTRS{idVendor}=="0403" ATTRS{idProduct}=="6015", ENV{ID_MM_DEVICE_IGNORE}="1",MODE:="0666",SYMLINK+="smart_robot_omnibotV12"

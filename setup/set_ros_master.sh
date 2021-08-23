@@ -26,7 +26,7 @@
 # Visit https://github.com/duckietown
 # Visit http://linux-wiki.cn/wiki/zh-tw/Shell%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8DIP%E5%9C%B0%E5%9D%80
 # -------------------------------------------------------------------------
-
+currentIP=$(hostname -I | awk '{print $1}')
 echo "Setting ROS_MASTER_URI..."
 if [ $# -gt 0 ]; then
 	# provided a hostname, use it as ROS_MASTER_URI
@@ -35,9 +35,6 @@ else
 	echo "No hostname provided. Using $HOSTNAME."
 	export ROS_MASTER_URI=http://$HOSTNAME.local:11311/
 fi
-
-IP=`hostname -I`
-
-export ROS_HOSTNAME=$IP
+export ROS_HOSTNAME=$currentIP
 echo "ROS_MASTER_URI set to $ROS_MASTER_URI"
-echo "ROS_HOSTNAME set to $IP"
+echo "Your IP address: $currentIP"

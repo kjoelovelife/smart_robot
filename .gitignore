@@ -1,0 +1,5 @@
+catkin_ws/devel
+catkin_ws/build
+catkin_ws/src/audio*
+seeed*
+catkin_ws/**/*.pyc

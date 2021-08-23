@@ -123,7 +123,7 @@ if __name__=="__main__":
     settings = termios.tcgetattr(sys.stdin)
 
     rospy.init_node('smartrobot_teleop')
-    pub = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
+    pub = rospy.Publisher('~cmd_vel', Twist, queue_size=10)
 
     status = 0
     target_linear_vel   = 0.0
