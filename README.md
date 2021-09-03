@@ -40,7 +40,7 @@ About raspeaker card : https://github.com/respeaker/seeed-voicecard
 
 ## Developer
 
-*Wei-Chih, Lin (kjoelovelife@gmail.com)
+*[Wei-Chih, Lin](weichih.lin@protonmail.com)
 
 # Usage & Tutorial
 
@@ -68,7 +68,7 @@ About raspeaker card : https://github.com/respeaker/seeed-voicecard
 
   For Mandarin chinese : https://www.makerlab.tw/blog/_ros2
 
-  For Emglish          : https://www.intorobotics.com/how-to-setup-ros-kinetic-to-communicate-between-raspberry-pi-3-and-a-remote-linux-pc/
+  For English          : https://www.intorobotics.com/how-to-setup-ros-kinetic-to-communicate-between-raspberry-pi-3-and-a-remote-linux-pc/
 
   And In this example , we use laptop to be the Master. 
 
