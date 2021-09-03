@@ -40,7 +40,7 @@ About raspeaker card : https://github.com/respeaker/seeed-voicecard
 
 ## Developer
 
-*[Wei-Chih, Lin](weichih.lin@protonmail.com)
+* [Wei-Chih, Lin](weichih.lin@protonmail.com)
 
 # Usage & Tutorial
 
