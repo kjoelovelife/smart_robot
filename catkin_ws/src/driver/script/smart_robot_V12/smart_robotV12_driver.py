@@ -53,6 +53,7 @@ class smart_robotV12():
         self.connected = False
         self.start = False
         self.clamp = lambda n, minn, maxn: max(min(maxn, n), minn)
+	self.hardware_version = "v0.07"
 
     def connect(self):
         print("Try to connect the Smart Robot")
@@ -106,9 +107,9 @@ class smart_robotV12():
         else :
             direction_y = math.pow(2,1)
         if veh_cmd[2] <= 0 :
-            direction_z = math.pow(2,0)
-        else :
             direction_z = 0
+        else :
+            direction_z = math.pow(2,0)
 
         direction = direction_x + direction_y + direction_z
         

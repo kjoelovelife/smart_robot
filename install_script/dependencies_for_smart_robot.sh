@@ -53,72 +53,63 @@ sudo apt-get install -y \
              mplayer
 
 ## ReSpeaker 4 Mic Array
-cd ~/smart_robot
-git clone https://github.com/respeaker/seeed-voicecard.git
-cd ~/smart_robot/seeed-voicecard.git
-sudo ./install.sh 
+#cd ~/smart_robot
+#git clone https://github.com/respeaker/seeed-voicecard.git
+#cd ~/smart_robot/seeed-voicecard.git
+#sudo ./install.sh 
 
 ## They don't have apt source
 cd ~/smart_robot/catkin_ws/src
 git clone https://github.com/ros/geometry2.git
 # about voice recognition
-git clone https://github.com/ros-drivers/audio_common.git
-git clone https://github.com/UTNuclearRoboticsPublic/pocketsphinx.git
-sudo mkdir -p /usr/share/pocketsphinx/model/hmm/en_US/
-sudo cp -r ~/smart_robot/catkin_ws/src/pocketsphinx/model/hub4wsj_sc_8k /usr/share/pocketsphinx/model/hmm/en_US/
+#git clone https://github.com/ros-drivers/audio_common.git
+#git clone https://github.com/UTNuclearRoboticsPublic/pocketsphinx.git
+#sudo mkdir -p /usr/share/pocketsphinx/model/hmm/en_US/
+#sudo cp -r ~/smart_robot/catkin_ws/src/pocketsphinx/model/hub4wsj_sc_8k /usr/share/pocketsphinx/model/hmm/en_US/
 
 # Download and copy the hub4wsj_sc_8k language model to /usr/share/pocketsphinx/model/hmm/en_US/. It can be found here : https://sourceforge.net/projects/cmusphinx/files/Acoustic%20and%20Language%20Models/Archive/US%20English%20HUB4WSJ%20Acoustic%20Model/
 
 ## Use pip to install library with python.
-sudo pip install pocketsphinx
+#sudo pip install pocketsphinx
 
 ## Use .dep to install
-sudo dpkg -i ~/smart_robot/audio_common_dependence/raspberrypi/libsphinxbase1_0.8-6_armhf.deb
-sudo dpkg -i ~/smart_robot/audio_common_dependence/raspberrypi/libpocketsphinx1_0.8-5_armhf.deb
-sudo dpkg -i ~/smart_robot/audio_common_dependence/raspberrypi/gstreamer0.10-pocketsphinx_0.8-5_armhf.deb
+#sudo dpkg -i ~/smart_robot/audio_common_dependence/raspberrypi/libsphinxbase1_0.8-6_armhf.deb
+#sudo dpkg -i ~/smart_robot/audio_common_dependence/raspberrypi/libpocketsphinx1_0.8-5_armhf.deb
+#sudo dpkg -i ~/smart_robot/audio_common_dependence/raspberrypi/gstreamer0.10-pocketsphinx_0.8-5_armhf.deb
 
 ## add rule for usb device
-sudo cp ~/smart_robot/uno.rules /etc/udev/rules.d/uno.rules.d
-sudo udevadm control --reload-rules 
-sudo udevadm trigger
+#sudo cp ~/smart_robot/uno.rules /etc/udev/rules.d/uno.rules.d
+#sudo udevadm control --reload-rules 
+#sudo udevadm trigger
 
 cd ~/smart_robot/catkin_ws
 
 ## install path: ~/ros_catkin_ws/src
-cd ~/ros_catkin_ws
-rosinstall_generator joy \
-                     teleop_twist_joy \
-                     teleop_twist_keyboard \
-                     laser_proc rgbd_launch \
-                     depthimage_to_laserscan \
-                     rosserial_arduino \ 
-                     rosserial_python \
-                     rosserial_server \
-                     rosserial_client  \
-                     rosserial_masgs \
-                     amcl \
-                     map_server \
-                     move_base \
-                     urdf \
-                     xacro \
-                     compressed_image_transport \
-                     rqt_image_view \
-                     gmapping \
-                     navigation \
-                     interactive_markers \
-                     joystick_drivers \
-                     image_transport \
-                     cv_bridge \
-                     vision_opencv \
-                     opencv3 \
-                     image_proc \
-                     --rosdistro kinetic --deps --wet-only --tar > ros_kinetic_smartRobot.rosinstall
-
-wstool merge -t src ros_kinetic_smartRobot.rosinstall
-wstool update -t src
-
-rosdep install --from-paths src --ignore-src --rosdistro kinetic -y -r --os=debian:stretch
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILED_TYPE=Release --install-space /opt/ros/kinetic -j1
+ros_version=kinetic
+sudo apt install ros-$ros_version-joy \
+                 ros-$ros_version-teleop-twist-joy \
+                 ros-$ros_version-teleop-twist-keyboard \
+                 ros-$ros_version-depthimage-to-laserscan \
+                 ros-$ros_version-rosserial-arduino\
+                 ros-$ros_version-rosserial-python \
+                 ros-$ros_version-rosserial-server \
+                 ros-$ros_version-rosserial-msgs \
+                 ros-$ros_version-amcl \
+                 ros-$ros_version-map-server \
+                 ros-$ros_version-move-base \
+                 ros-$ros_version-urdf \
+                 ros-$ros_version-xacro \
+                 ros-$ros_version-compressed-image-transport\
+                 ros-$ros_version-rqt-image-view \
+                 ros-$ros_version-gmapping \
+                 ros-$ros_version-navigation \
+                 ros-$ros_version-interactive-markers \
+                 ros-$ros_version-joystick-drivers \
+                 ros-$ros_version-image-transport \
+                 ros-$ros_version-cv-bridge \
+                 ros-$ros_version-vision-opencv \
+                 ros-$ros_version-opencv3 \
+                 ros-$ros_version-image-proc
 
 # ROS Control App : https://play.google.com/store/apps/details?id=com.robotca.ControlApp
 
