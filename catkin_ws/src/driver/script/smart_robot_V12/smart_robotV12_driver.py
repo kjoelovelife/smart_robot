@@ -53,7 +53,10 @@ class smart_robotV12():
         self.connected = False
         self.start = False
         self.clamp = lambda n, minn, maxn: max(min(maxn, n), minn)
-	self.hardware_version = "v0.07"
+	self.hardwarw = {
+		"version": "OminiBotHV1.2",
+		"firmware": 0.07,
+	}
 
     def connect(self):
         print("Try to connect the Smart Robot")
