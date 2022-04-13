@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
   <!-- raspicam_node package should be downloaded and be launched in the raspberry pi before launch this file -->
 
